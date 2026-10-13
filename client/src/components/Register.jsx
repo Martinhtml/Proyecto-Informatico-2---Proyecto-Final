@@ -43,7 +43,7 @@ return(<>
         <div id="contenedorRegister">
             <div className="rectangulo">
                 <h1>Registro</h1>
-                <br/>
+            <br/>
                 <form onSubmit={Registrarse}>
                     <label htmlFor="name">Nombre:</label>
                     <input placeholder="Nombre" type="text" id="name" required onChange={(e) => setName(e.target.value)}/>
