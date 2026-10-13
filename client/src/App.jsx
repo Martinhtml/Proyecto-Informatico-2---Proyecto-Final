@@ -1,0 +1,34 @@
+import { useState } from 'react'
+import heroImg from './assets/hero.png'
+import reactLogo from './assets/react.svg'
+import viteLogo from './assets/vite.svg'
+import './App.css'
+import {Routes, Route, Link} from "react-router-dom"
+import Layout from './components/Layout'
+import Register from './components/Register'
+import LogIn from './components/LogIn'
+
+
+
+function App() {
+
+  return (
+    <>
+      <Routes>
+        
+
+        <Route element={<Layout />} path="">
+        
+          <Route path="" />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/registro" element={<Register/>}/>
+        </Route>
+        
+      </Routes>
+      
+    </>
+    
+  )
+}
+
+export default App

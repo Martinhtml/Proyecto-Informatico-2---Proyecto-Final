@@ -1,0 +1,66 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    padding: 0 40px;
+    transition: background-color 0.3s ease;
+
+}
+header:hover{
+    background-color: #0d5c75;
+}
+
+header #ContenedorTitulo a{
+    font-size: 30px;
+    color : white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+}
+
+header #ContenedorTitulo a:hover{
+    font-size: 34px;
+}
+
+.contenedor-derecha {
+    margin-left: auto; 
+    display: flex;
+    align-items: center;
+
+}
+
+.botones-autenticacion a{
+    display: flex;
+    padding: 20px;
+    transition: all 0.3s ease;
+
+}
+
+.botones-autenticacion a:hover{
+    font-size: 34px;
+
+}
+
+header #ContenedorSaludo{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    margin: 0;
+}
+
+header nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;    
+}
+
+header nav a {
+    text-decoration: none;
+    color: #a3cef1;
+    font-size: 30px;
+    padding: 10px;
+}
