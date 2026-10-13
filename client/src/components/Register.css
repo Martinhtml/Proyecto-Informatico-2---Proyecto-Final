@@ -1,6 +1,5 @@
 
 #contenedorRegister {
-    --fondo: #6c7a89;
     --campo: #2b829c;
     --borde: #0d5c75;
     --texto: #2c3e50;
@@ -11,7 +10,6 @@
 
 #contenedorRegister {
     
-    background-color: var(--fondo);
     padding: 0px 20px;
     display: flex;
     flex-direction: column;

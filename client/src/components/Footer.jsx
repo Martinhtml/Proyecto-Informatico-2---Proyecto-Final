@@ -7,17 +7,28 @@ function Footer() {
     return (
         <footer>
             <div className="SectorArriba">
-                <div className="Sector1">
-                    <Link to="/">Gestor de Turnos</Link>
+                <div className="Sectores">
+                    <Link to="/" id="TituloFooter">Gestor de Turnos</Link>
                 </div>
-                <div className="Sector2">
-                    <p>holas</p>
+                <div className="Sectores">
+                    <h3>Secciones: </h3>
+                    <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link>Ver Turnos</Link></li>
+                        <li><Link>Perfil</Link></li>
+                    </ul>
                 </div>
-                <div className="Sector3">
-                    <p>safjhasjf</p>
+                <div className="Sectores">
+                    <h3>Atencion al cliente: </h3>
+                    <ul>
+                        <li>Lunes a Viernes: 9:00 - 18:00</li>
+                        <li>Sábados: 9:00 - 13:00</li>
+                    </ul>
                 </div>
-                <div className="Sector4">
-                    <p>holas</p>
+                <div className="Sectores">
+                    <h3>Contacto: </h3>
+                    <div className="Iconos"><img src="../assets/instagram.png" alt="No funciona"/></div>
+
                 </div>
             </div>
             

@@ -7,7 +7,7 @@ import {Routes, Route, Link} from "react-router-dom"
 import Layout from './components/Layout'
 import Register from './components/Register'
 import LogIn from './components/LogIn'
-
+import Home from "./components/Home"
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
         <Route element={<Layout />} path="">
         
-          <Route path="" />
+          <Route path="" element={<Home/>}/>
           <Route path="/login" element={<LogIn />} />
           <Route path="/registro" element={<Register/>}/>
         </Route>

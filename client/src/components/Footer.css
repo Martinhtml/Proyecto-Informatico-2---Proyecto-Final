@@ -18,39 +18,51 @@ footer{
 
 }
 
-.SectorArriba .Sector1{
+.SectorArriba .Sectores{
     display: flex;
+    flex-direction: column;
     width: 25%;
     height: 100%;
 }
 
-.SectorArriba .Sector1 a{
+#TituloFooter{
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
+    color: #EEEEEE;
     font-weight: bold;
-    font-size: 23px;
+    font-size: 25px;
     height: fit-content;
-    
+}
+
+ul{
+    padding: 5px;
+    list-style: none;
+}
+
+ul li{
+    padding-top: 5px;
+}
+
+ul li a{
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #9BA4B5  ;
+    font-weight: bold;
+    font-size: 17px;
+    height: fit-content;
+}
+
+ul li a:hover{
+
+    color: #F4F4F2 ;
+
 }
 
 
-.SectorArriba .Sector2{
-    display: flex;
-    width: 25%;
-    height: 100%;
-}
-.SectorArriba .Sector3{
-    display: flex;
-    width: 25%;
-    height: 100%;
+h3{
+    color : #EEEEEE;
 }
 
-.SectorArriba .Sector4{
-    display: flex;
-    width: 25%;
-    height: 100%;
-}
 .SectorAbajo{
     display: flex;
     margin-bottom: auto;
