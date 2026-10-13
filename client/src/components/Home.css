@@ -1,3 +1,14 @@
+.contenedorImagenes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 210px;
+    padding: 20px 20px; 
+}
+#Fotos{
+    height: 300px;
+    width: 300px;
+}
 .contenedorTarjetas{
     display: flex;
     flex-wrap: wrap;

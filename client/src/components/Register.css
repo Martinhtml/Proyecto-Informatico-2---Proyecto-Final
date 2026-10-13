@@ -64,7 +64,7 @@
 
 
 #contenedorRegister input {
-    width: 100%;
+    width: 150px;
     padding: 10px 12px 10px 12px;
     background-color: #dedfe1;
     color: var(--texto);
@@ -95,7 +95,7 @@
     background-color: #0d5c75;
     align-self: center;
     font-size: 15px;
-    width: 100%;
+    width: 200px;
     border-radius: 10px;
     padding: 5px 5px 5px 0px;
     font-size: 20px;

@@ -2,6 +2,11 @@ import "./Footer.css"
 
 import {Link} from "react-router-dom"
 
+import iconoIG from "../assets/instagram.png"
+import iconoYT from "../assets/youtube.png"
+import iconoWSP from "../assets/whatsapp.png"
+
+
 
 function Footer() {
     return (
@@ -27,7 +32,13 @@ function Footer() {
                 </div>
                 <div className="Sectores">
                     <h3>Contacto: </h3>
-                    <div className="Iconos"><img src="../assets/instagram.png" alt="No funciona"/></div>
+                    <div className="Iconos">
+                        <br />
+                        <img src={iconoIG} alt="Instagram"/>
+                        <img src={iconoYT} alt="Youtube"/>
+                        <img src={iconoWSP} alt="Whatsapp"/>
+                        
+                    </div>
 
                 </div>
             </div>

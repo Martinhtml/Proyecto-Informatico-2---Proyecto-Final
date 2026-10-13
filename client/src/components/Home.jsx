@@ -1,14 +1,18 @@
 import "./Home.css"
-import fotoPrincipal from "../assets/img1.png"
-
+import foto1 from "../assets/img2Medalla.png"
+import foto2 from "../assets/img3.png";
+import foto3 from "../assets/fiscalias-de-turno.png"
 
 
 function Home(){
 
     return (<>
         <div>
-            <div>
-            <img id="FotoPrincipal" src={fotoPrincipal} alt="" />
+            <div className="contenedorImagenes">
+            <img id="Fotos" src={foto1} alt="" />
+            <img id="Fotos" src={foto3} alt="" />
+            <img id="Fotos" src={foto2} alt="" />
+            
           </div>
           <div className="contenedorTarjetas">
                     <div className="Tarjeta">
