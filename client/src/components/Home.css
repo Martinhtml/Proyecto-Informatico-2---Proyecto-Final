@@ -1,13 +1,15 @@
 .contenedorImagenes{
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: center;
-    gap: 210px;
+    width: 100%;
     padding: 20px 20px; 
 }
-#Fotos{
-    height: 300px;
-    width: 300px;
+.Fotos{
+    height: auto;
+    width: 30%;
+    margin: 20px;
 }
 .contenedorTarjetas{
     display: flex;
@@ -18,7 +20,7 @@
     
 }
 .Tarjetas{
-    width: 280px;
+    width: 100%;
     height: 200px;
     perspective: 1000px;
     cursor: pointer;
@@ -75,14 +77,14 @@
 }
 
 
-#FotoPrincipal{
+/* #FotoPrincipal{
     width: 99.05vw;
     height: 90vh;
     
     
 
     margin-left: -30px;
-}
+} */
 
 .tarjetaFrente h2{
     margin: 0;

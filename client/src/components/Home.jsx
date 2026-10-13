@@ -9,9 +9,9 @@ function Home(){
     return (<>
         <div>
             <div className="contenedorImagenes">
-            <img id="Fotos" src={foto1} alt="" />
-            <img id="Fotos" src={foto3} alt="" />
-            <img id="Fotos" src={foto2} alt="" />
+            <img className="Fotos" src={foto1} alt="" />
+            <img className="Fotos" src={foto3} alt="" />
+            <img className="Fotos" src={foto2} alt="" />
             
           </div>
           <div className="contenedorTarjetas">
