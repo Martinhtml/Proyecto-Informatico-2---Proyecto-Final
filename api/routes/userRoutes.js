@@ -3,6 +3,7 @@ const {Router} = require("express")
 const auth = require("../middlewares/auth");
 const {iniciarSesion, register, obtenerNombreUsuario} = require("../controllers/userController");
 
+
 const router = Router();
 
 
