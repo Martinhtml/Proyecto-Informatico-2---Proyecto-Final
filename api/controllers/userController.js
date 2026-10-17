@@ -57,7 +57,7 @@ const register = async (req,res) => {
         const {name, apellido, dni, email, password} = req.body
         const hashedPassword = await bcrypt.hash(password, 12)
 
-        const dvh = calcularDVH(name, apellido, dni, email, hashedPassword)//
+        const dvh = calcularDVH(name, apellido, dni, email, hashedPassword)
 
 
 

@@ -6,8 +6,6 @@ const calcularDVH = (...campos) =>{
 
     
 
-// const calcularDVV = (dvhs)
-//     crypto.createHash('sha256').update(stringDVH).digest('hex'); No se que intentaste hacer aca
 
 module.exports = {
     calcularDVH,
