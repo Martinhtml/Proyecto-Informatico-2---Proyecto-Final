@@ -8,6 +8,8 @@ import Layout from './components/Layout'
 import Register from './components/Register'
 import LogIn from './components/LogIn'
 import Home from "./components/Home"
+import LogOut from "./components/LogOut"
+
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
           <Route path="" element={<Home/>}/>
           <Route path="/login" element={<LogIn />} />
           <Route path="/registro" element={<Register/>}/>
+          <Route path="logout" element={<LogOut/>}/>
         </Route>
         
       </Routes>
