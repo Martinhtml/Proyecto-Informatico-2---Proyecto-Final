@@ -11,8 +11,11 @@ header {
 header:hover{
     background-color: #0d5c75;
 }
-
+header #ContenedorTitulo{
+    justify-content: center;
+}
 header #ContenedorTitulo a{
+   
     font-size: 30px;
     color : white;
     text-decoration: none;
@@ -71,3 +74,4 @@ header nav a {
     font-size: 30px;
     padding: 10px;
 }
+
