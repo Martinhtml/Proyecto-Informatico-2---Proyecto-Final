@@ -13,7 +13,7 @@ const Turno = sequelize.define(
             allowNull : false
         },
         "estado" : {
-            type : DataTypes.ENUM("Pendiente", "Terminado", "Completado", "Cancelado"),
+            type : DataTypes.ENUM("Pendiente", "Reprogramado", "Completado", "Cancelado"),
             allowNull : false,
         },
         "DigitoVHTurno" : {
