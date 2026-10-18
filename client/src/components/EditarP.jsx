@@ -1,15 +1,39 @@
 import { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./EditarP.css"
+import axios from "axios";
 
 function EditarP(){
 
-     const [nombre, setNombre] = useState("");
+    const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
+    const [mensaje, setMensaje] = useState("");
+    const navigate = useNavigate()
 
-    const editar = ()=>{
+    const editar = async (e)=>{
+        try{
+
+            e.preventDefault()
+
+
+            const token = localStorage.getItem("token")
+            const respuesta = await axios.patch("http://localhost:3000/user/editProf", {nombre, apellido}, 
+                {headers: {authorization: `Bearer ${token}`}})
+            console.log(respuesta.data)
+            navigate("/perfil")
+            
+
+
+
+
+            window.dispatchEvent(new Event("TokenActualizado"))
+
+        }catch(error){
+            setMensaje("No se pudo editar el perfil")
+        }
+        
         
     }
 
@@ -20,15 +44,15 @@ function EditarP(){
                 <h1>Editar Perfil</h1>
                 <br/>
                 <form onSubmit={editar}>
-                    <label htmlFor="Nombre">Nombre:</label>
-                    <input placeholder="Nombre" type="text" id="text" onChange={(e) => setNombre(e.target.value)}/>
+                    <label htmlFor="Nombre">Nuevo nombre:</label>
+                    <input placeholder="Nuevo nombre" type="text" id="nombre" onChange={(e) => setNombre(e.target.value)}/>
                     <br/>
-                    <label htmlFor="password">Contraseña:</label>
-                    <input placeholder="Contraseña" type="password" id="password" onChange={(e) => setApellido(e.target.value)}/>
+                    <label htmlFor="Apellido">Nuevo apellido:</label>
+                    <input placeholder="Nuevo apellido" type="text" id="apellido" onChange={(e) => setApellido(e.target.value)}/>
                     <br/>
                     <button type="submit">Confirmar</button>
                     <br/>
-                    {/* <p>{mensaje}</p> */}
+                    <p>{mensaje}</p>
 
                 </form>
                 <br />

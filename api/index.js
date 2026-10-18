@@ -11,6 +11,8 @@ require("./models/index.js")
 
 
 const userRoutes = require("./routes/userRoutes");
+const turnosRoutes = require("./routes/turnosRoutes");
+const dispoRoutes = require("./routes/disponibilidadRoutes")
 
 server.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
@@ -24,7 +26,8 @@ server.use((req, res, next) => {
 })
 
 server.use("/user", userRoutes);
-
+server.use("/turnos", turnosRoutes);
+server.use("/disponibilidad", dispoRoutes);
 
 
 server.listen(3000, async ()=>{

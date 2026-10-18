@@ -8,6 +8,8 @@ import "./Header.css";
 function Header() {
     const [token, setToken] = useState(localStorage.getItem("token") || "");
     const [nombre, setNombre] = useState("");
+    const [actualizacion, setActualizacion] = useState(0);
+
 
     const obtenerNombreUsuario = async () => {
         const response = await axios.get("http://localhost:3000/user/obtenerNombreUsuario", {
@@ -19,8 +21,12 @@ function Header() {
     useEffect(()=>{
 
         const actualizarToken =()=>{
+
             setToken(localStorage.getItem("token") || "");
+            setActualizacion(actualizacion + 1);
+
         }
+
         window.addEventListener("TokenActualizado", actualizarToken);
 
         return () => {
@@ -34,7 +40,7 @@ function Header() {
         }else{
             setNombre("");
         }
-    }, [token])
+    }, [token, actualizacion])
 
     return (
         <header>

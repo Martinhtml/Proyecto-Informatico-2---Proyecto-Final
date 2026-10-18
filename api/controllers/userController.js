@@ -8,6 +8,7 @@ const DVV = require('../models/DVVModel')
 
 const {registrarEventoBitacora} = require('./bitacoraController');
 const {inicioSesion} = require('./inicioSesionController');
+const { Op } = require('sequelize');
 
 
 const iniciarSesion = async (req, res) => {
@@ -49,6 +50,8 @@ const obtenerNombreUsuario = async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 }
+
+
 
 
 const obtenerUsuario = async (req, res) => {
@@ -105,10 +108,57 @@ const register = async (req,res) => {
         });
     }   
 }   
+
+
+
+
+
+
+const editarUser = async (req, res)=>{
+    try{
+        const userID = req.user.id
+        const {nombre, apellido} = req.body
+        const user = await User.findByPk(userID);
+        if (!user){
+            return res.status(404).json({"message" : "Usuario no encontrado"})
+        }
+        if (!nombre || !apellido){
+            return res.status(400).json({"message" : "Faltan datos"})
+        }
+        user.nombre = nombre
+        user.apellido = apellido
+
+        const dvh = calcularDVH(nombre, apellido, user.dni, user.email, user.hashedPassword)
+
+        let dvhsTot = await User.findAll({where : {id : {[Op.ne] : userID}}}, {attributes : ['DigitoVHUser']});
+        dvhsTot = dvhsTot.map((a)=>a.DigitoVHUser)
+        dvhsTot.push(dvh)
+
+        await calcularDVV("users", dvhsTot)
+
+        await registrarEventoBitacora({
+            idUser: userID,
+            accion: 'EDICION PERFIL',
+            descripcion: `El usuario ${userID} modifico su perfil`
+        })
+
+
+        await user.save()
+        
+        
+        
+        return res.status(200).json({"message" : "Perfil editado"})
+    }catch(error){
+        return res.status(500).json(error)
+    }
+}
+
+
 module.exports = { 
     iniciarSesion,
     register,
     obtenerNombreUsuario,
-    obtenerUsuario
+    obtenerUsuario,
+    editarUser
 
  };

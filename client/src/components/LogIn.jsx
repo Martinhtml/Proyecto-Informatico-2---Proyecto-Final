@@ -26,6 +26,7 @@ function LogIn(){
             console.log(response.data)
             localStorage.setItem("token", response.data);
 
+            
             window.dispatchEvent(new Event("TokenActualizado"))
 
             navigate("/")
