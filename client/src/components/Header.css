@@ -50,6 +50,13 @@ header #ContenedorSaludo{
     margin: 0;
 }
 
+header #ContenedorSaludo a {
+    text-decoration: none;
+    color: #f7f7f7;
+    font-size: 30px;
+    padding: 10px;
+}
+
 header nav {
     display: flex;
     flex-direction: row;

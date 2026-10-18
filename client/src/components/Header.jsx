@@ -51,7 +51,7 @@ function Header() {
                 </nav>
             ) : (
                 <div id='ContenedorSaludo'>
-                    <h2>Bienvenido, {nombre}</h2>
+                    <Link to="/perfil">Bienvenido, {nombre}</Link>
                 </div>
             )}
         </div>

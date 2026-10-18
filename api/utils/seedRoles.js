@@ -31,7 +31,8 @@ const ROLES = {
     'Disponibilidad:read', 'Disponibilidad:create', 'Disponibilidad:delete',
     'Turnos:read', 'Turnos:update'
   ],
-  administrador:   ['Disponibilidad', 'create',   
+  administrador:   [
+  'Disponibilidad', 'create',   
   'Disponibilidad', 'read',     
   'Disponibilidad', 'delete',
   'Disponibilidad', 'update',   
@@ -57,4 +58,5 @@ const seedRoles = async () => {
   const permisos = {}
   for (const [tabla, accion] of PERMISOS) {
 
+    
   }}

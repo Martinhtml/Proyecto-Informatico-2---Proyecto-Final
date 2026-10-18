@@ -9,6 +9,8 @@ import Register from './components/Register'
 import LogIn from './components/LogIn'
 import Home from "./components/Home"
 import LogOut from "./components/LogOut"
+import Perfil from './components/Perfil'
+import EditarP from './components/EditarP'
 
 
 
@@ -25,6 +27,8 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path="/registro" element={<Register/>}/>
           <Route path="logout" element={<LogOut/>}/>
+          <Route path="/perfil" element={<Perfil/>}/>
+          <Route path="/editP" element={<EditarP/>}/>
         </Route>
         
       </Routes>

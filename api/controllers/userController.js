@@ -51,6 +51,19 @@ const obtenerNombreUsuario = async (req, res) => {
 }
 
 
+const obtenerUsuario = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const user = await User.findByPk(userId, {attributes : {exclude : ["contraseña"]}})
+        if (!user){
+            return res.status(404).json({ error: "Usuario no encontrado" });
+        }
+        return res.status(200).json(user);
+    }catch(error){
+        return res.status(500).json({ error: error.message });
+    }
+}
+
 const register = async (req,res) => {
     try{
 
@@ -95,6 +108,7 @@ const register = async (req,res) => {
 module.exports = { 
     iniciarSesion,
     register,
-    obtenerNombreUsuario
+    obtenerNombreUsuario,
+    obtenerUsuario
 
  };
