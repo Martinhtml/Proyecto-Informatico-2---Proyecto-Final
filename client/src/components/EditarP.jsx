@@ -39,8 +39,8 @@ function EditarP(){
 
     return(<>
     
-        <div id="contenedorLogin">
-            <div className="rectangulo">
+        <div id="contenedorEditar">
+            <div className="contEditP">
                 <h1>Editar Perfil</h1>
                 <br/>
                 <form onSubmit={editar}>
