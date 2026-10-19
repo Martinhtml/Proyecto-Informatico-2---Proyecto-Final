@@ -9,6 +9,8 @@ const bcrypt = require("bcrypt");
 const {sequelize} = require("./config/db")
 require("./models/index.js")
 
+const seedRoles = require("./utils/seedRoles");
+
 
 const userRoutes = require("./routes/userRoutes");
 const turnosRoutes = require("./routes/turnosRoutes");
