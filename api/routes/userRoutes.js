@@ -9,7 +9,6 @@ const router = Router();
 
 router.post("/register", register);
 router.post("/login", iniciarSesion);
-router.post("/")
 
 
 

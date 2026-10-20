@@ -9,7 +9,7 @@ const router = Router();
 router.get("/mios", auth, obtenerMisRoles)
 
 router.get("/", auth, tienePermiso("Roles", "read"), listarRoles)
-router.post("/usuarios", auth, tienePermiso("Roles", "update"), asignarRolAUsuario)
+// router.post("/usuarios", auth, tienePermiso("Roles", "update"), asignarRolAUsuario)
 router.delete("/usuarios/:usuarioID/:rolID", auth, tienePermiso("Roles", "update"), quitarRolDeUsuario)
  
 module.exports = router;

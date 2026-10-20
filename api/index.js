@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 const {sequelize} = require("./config/db")
 require("./models/index.js")
 
-const seedRoles = require("./utils/seedRoles");
+const {seedRoles} = require("./utils/seedRoles");
 const { asignarRolNombre } = require("./controllers/rolController"); 
 
 
