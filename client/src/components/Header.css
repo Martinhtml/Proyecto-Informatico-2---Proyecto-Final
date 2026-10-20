@@ -26,9 +26,28 @@ header #ContenedorTitulo a{
 header #ContenedorTitulo a:hover{
     font-size: 34px;
 }
+.ContenedorMedio {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#ContenedorTurnos{
+    display: flex;             
+    flex-direction: row;        
+    align-items: center;        
+    gap: 7px;
+}
+#ContenedorTurnos h2 {
+    text-decoration: none;
+    color: #f7f7f7;
+    font-size: 30px;
+    padding: 10px;
+}
+
 
 .contenedor-derecha {
-    margin-left: auto; 
     display: flex;
     align-items: center;
 

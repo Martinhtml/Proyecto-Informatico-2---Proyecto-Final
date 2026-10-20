@@ -50,16 +50,17 @@ function Header() {
             <div id='ContenedorTitulo'> 
                 <Link to="/">Gestor de Turnos</Link> 
             </div>
-        <div id='ContenedorMedio'>
+        <div className='ContenedorMedio'>
                 {!token ? (
                 <p></p>
             ) : (
                 <div id='ContenedorTurnos'>
+                    <h2>CrearTurno</h2>
                     <h2>VerTurno</h2>
                 </div>
             )}
 
-            </div>
+        </div>
         <div className="contenedor-derecha">
             {!token ? (
                 <nav className="botones-autenticacion">

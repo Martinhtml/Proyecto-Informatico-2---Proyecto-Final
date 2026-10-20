@@ -1,4 +1,4 @@
-const { asignarRolNombre } = require('./api/controllers/rolController');
+const { asignarRolNombre } = require('./controllers/rolController');
 
 async function probar() {
     console.log("Probando asignación de rol...");
