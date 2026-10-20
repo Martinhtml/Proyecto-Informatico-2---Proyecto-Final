@@ -16,6 +16,7 @@ const { asignarRolNombre } = require("./controllers/rolController");
 const userRoutes = require("./routes/userRoutes");
 const turnosRoutes = require("./routes/turnosRoutes");
 const dispoRoutes = require("./routes/disponibilidadRoutes")
+const rolRoutes = require("./routes/rolRoutes");
 
 server.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')

@@ -11,9 +11,10 @@ const asignarRolNombre = async (usuarioID, nombreRol) => {
     const rol = await Rol.findOne({where: {nombre : nombreRol}})
 
     if(!usuario || !rol){
-      console.error(`No se pudo asignar el rol ${nombreRol}`, error.message)  
+      console.error(`No se pudo asignar el rol ${nombreRol}`, error.message);
+      return;
     }
-    await usuario.addRol(rol)
+    await usuario.addRoles(rol);
 
     await registrarEventoBitacora({ idUser: usuarioID, accion : "ASIGNAR ROL", descripcion : `El usuario ${usuarioID} se le asigno el  rol ${nombreRol}`})
 
@@ -56,11 +57,11 @@ const asignarRolAUsuario = async (req, res) => {
             return res.status(404).json({ message: "Usuario o rol no encontrado" })
         }
  
-        if (await usuario.hasRole(rol)) {
+        if (await usuario.hasRol(rol)) {
             return res.status(409).json({ message: "El usuario ya tiene ese rol" })
         }
  
-        await usuario.addRole(rol)
+        await usuario.addRol(rol)
  
         await registrarEventoBitacora({
             idUser: req.user.id,
@@ -88,7 +89,7 @@ const quitarRolDeUsuario = async (req, res) => {
             return res.status(404).json({ message: "Usuario o rol no encontrado" })
         }
  
-        if (!(await usuario.hasRole(rol))) {
+        if (!(await usuario.hasRol(rol))) {
             return res.status(404).json({ message: "El usuario no tiene ese rol" })
         }
  
