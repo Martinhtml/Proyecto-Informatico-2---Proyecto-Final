@@ -2,7 +2,7 @@ const express = require("express");
 const server = express();
 server.use(express.json());
 server.use(express.static('public'))
-const { User } = require("./models/index");
+const { User, Establecimiento } = require("./models/index");
 const bcrypt = require("bcrypt");
 
 
@@ -16,6 +16,7 @@ const { asignarRolNombre } = require("./controllers/rolController");
 const userRoutes = require("./routes/userRoutes");
 const turnosRoutes = require("./routes/turnosRoutes");
 const dispoRoutes = require("./routes/disponibilidadRoutes")
+const estableRoutes = require("./routes/establecimientosRoutes.js")
 const rolRoutes = require("./routes/rolRoutes");
 
 server.use((req, res, next) => {
@@ -32,6 +33,8 @@ server.use((req, res, next) => {
 server.use("/user", userRoutes);
 server.use("/turnos", turnosRoutes);
 server.use("/disponibilidad", dispoRoutes);
+server.use("/establecimientos", estableRoutes);
+
 server.use("/roles", rolRoutes);  
 
 
@@ -40,7 +43,10 @@ server.listen(3000, async ()=>{
     await sequelize.authenticate();
     await sequelize.sync({force : true});
     console.log("El server esta prendido en el puerto 3000")
-    await seedRoles();
-    const martin = await User.create({ "nombre": "Martin", "apellido": "Donnari", "email": "donnari.martinet36@gmail.com", "contraseña": (await bcrypt.hash("1234", 12)), "dni": 49123638, "DigitoVHUser": "1234567890" })
-    await asignarRolNombre(martin.id, "administrador");
+    await User.create({ "nombre": "Martin", "apellido": "Donnari", "email": "donnari.martinet36@gmail.com", "contraseña": (await bcrypt.hash("1234", 12)), "dni": 49123638, "DigitoVHUser": "1234567890" })
+    await Establecimiento.create({"nombre" : "Cemic", "direccion" : "Galvan 3300"})
+
+    // await seedRoles();
+    // const martin = await User.create({ "nombre": "Martin", "apellido": "Donnari", "email": "donnari.martinet36@gmail.com", "contraseña": (await bcrypt.hash("1234", 12)), "dni": 49123638, "DigitoVHUser": "1234567890" })
+    // await asignarRolNombre(martin.id, "administrador");
 })

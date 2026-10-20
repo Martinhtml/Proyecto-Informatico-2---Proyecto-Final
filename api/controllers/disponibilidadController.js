@@ -11,7 +11,7 @@ const subirDisponibilidad = async(req, res)=>{
         const medicoID = req.user.id
         const {fechaInicio, fechaFin, establecimientoID} = req.body
 
-        if (!fechaInicio, !fechaFin, !establecimientoID){
+        if (!fechaInicio || !fechaFin || !establecimientoID){
             return res.status(400).json({"message" : "Faltan datos"})
         }
 
@@ -33,7 +33,8 @@ const subirDisponibilidad = async(req, res)=>{
             medicoID : medicoID,
             fechaInicio,
             fechaFin,
-            establecimientoID
+            establecimientoID,
+            DigitoVHDisponibilidad : dvh
         })
         return res.status(201).json(dispon)
 

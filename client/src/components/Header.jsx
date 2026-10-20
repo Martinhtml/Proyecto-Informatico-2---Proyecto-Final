@@ -23,7 +23,7 @@ function Header() {
         const actualizarToken =()=>{
 
             setToken(localStorage.getItem("token") || "");
-            setActualizacion(actualizacion + 1);
+            setActualizacion(prev => prev + 1);
 
         }
 
@@ -37,6 +37,7 @@ function Header() {
     useEffect(()=>{
         if(token){
             obtenerNombreUsuario();
+            console.log("hola")
         }else{
             setNombre("");
         }
