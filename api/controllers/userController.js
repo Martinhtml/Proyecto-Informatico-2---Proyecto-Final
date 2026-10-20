@@ -130,6 +130,8 @@ const editarUser = async (req, res)=>{
 
         const dvh = calcularDVH(nombre, apellido, user.dni, user.email, user.hashedPassword)
 
+        user.DigitoVHUser = dvh
+        
         let dvhsTot = await User.findAll({where : {id : {[Op.ne] : userID}}}, {attributes : ['DigitoVHUser']});
         dvhsTot = dvhsTot.map((a)=>a.DigitoVHUser)
         dvhsTot.push(dvh)
