@@ -45,16 +45,7 @@ function Header() {
 
     return (
         <header>
-            <div id='ContenedorIzquierda'>
-                {!token ? (
-                <p></p>
-            ) : (
-                <div id='ContenedorTurnos'>
-                    <h2>VerTurno</h2>
-                </div>
-            )}
-
-            </div>
+            
 
             <div id='ContenedorTitulo'> 
                 <Link to="/">Gestor de Turnos</Link> 

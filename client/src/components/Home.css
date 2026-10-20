@@ -14,7 +14,7 @@
 }
 .contenedorTarjetas{
     background-color: #fff;
-    border-radius: 5%;
+    border-radius: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
