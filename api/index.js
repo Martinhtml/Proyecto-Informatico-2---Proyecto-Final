@@ -30,6 +30,7 @@ server.use((req, res, next) => {
 server.use("/user", userRoutes);
 server.use("/turnos", turnosRoutes);
 server.use("/disponibilidad", dispoRoutes);
+server.use("/roles", rolRoutes);  
 
 
 server.listen(3000, async ()=>{
@@ -37,6 +38,7 @@ server.listen(3000, async ()=>{
     await sequelize.authenticate();
     await sequelize.sync({force : true});
     console.log("El server esta prendido en el puerto 3000")
-    await User.create({ "nombre": "Martin", "apellido": "Donnari", "email": "donnari.martinet36@gmail.com", "contraseña": (await bcrypt.hash("1234", 12)), "dni": 49123638, "DigitoVHUser": "1234567890" })
-
+    await seedRoles();
+    const martin = await User.create({ "nombre": "Martin", "apellido": "Donnari", "email": "donnari.martinet36@gmail.com", "contraseña": (await bcrypt.hash("1234", 12)), "dni": 49123638, "DigitoVHUser": "1234567890" })
+    await asignarRolNombre(martin.id, "administrador");
 })
