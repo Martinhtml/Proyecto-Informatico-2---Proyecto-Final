@@ -10,12 +10,14 @@ const {sequelize} = require("./config/db")
 require("./models/index.js")
 
 const seedRoles = require("./utils/seedRoles");
+const { asignarRolNombre } = require("./controllers/rolController"); 
 
 
 const userRoutes = require("./routes/userRoutes");
 const turnosRoutes = require("./routes/turnosRoutes");
 const dispoRoutes = require("./routes/disponibilidadRoutes")
 const estableRoutes = require("./routes/establecimientosRoutes.js")
+const rolRoutes = require("./routes/rolRoutes");
 
 server.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
@@ -33,6 +35,7 @@ server.use("/turnos", turnosRoutes);
 server.use("/disponibilidad", dispoRoutes);
 server.use("/establecimientos", estableRoutes);
 
+server.use("/roles", rolRoutes);  
 
 
 server.listen(3000, async ()=>{
@@ -43,4 +46,7 @@ server.listen(3000, async ()=>{
     await User.create({ "nombre": "Martin", "apellido": "Donnari", "email": "donnari.martinet36@gmail.com", "contraseña": (await bcrypt.hash("1234", 12)), "dni": 49123638, "DigitoVHUser": "1234567890" })
     await Establecimiento.create({"nombre" : "Cemic", "direccion" : "Galvan 3300"})
 
+    await seedRoles();
+    const martin = await User.create({ "nombre": "Martin", "apellido": "Donnari", "email": "donnari.martinet36@gmail.com", "contraseña": (await bcrypt.hash("1234", 12)), "dni": 49123638, "DigitoVHUser": "1234567890" })
+    await asignarRolNombre(martin.id, "administrador");
 })
