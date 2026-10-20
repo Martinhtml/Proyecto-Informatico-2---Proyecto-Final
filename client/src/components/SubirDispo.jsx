@@ -37,7 +37,7 @@ function SubirDispo(){
     const subirDispo = async(e)=>{
         try{
             e.preventDefault()
-
+            console.log("¡El botón funciona y el formulario se está enviando!")
             const token = localStorage.getItem("token")
 
             if (fechaIn <= new Date() || fechaFin <= fechaIn){
@@ -67,37 +67,44 @@ function SubirDispo(){
 
         <form className="CartaDispo" onSubmit={subirDispo}> 
             
-            <h1>Nueva disponibilidad</h1>
+            <h1>Nueva disponibilidad  </h1> 
             
-            <div className="contFI">
-                <label htmlFor="fechaInicio">Fecha inicio: </label>
-                <input type="datetime-local"  id="fechaInicio" onChange={(e)=>{setFechaIn(e.target.value)}}/>
+            
+            <div id="contDatosDispo">
+                <div className="derecha">
+                    <div className="contFI">
+                        <label htmlFor="fechaInicio">Fecha inicio: </label>
+                        <input type="datetime-local"  id="fechaInicio" onChange={(e)=>{setFechaIn(e.target.value)}}/>
+                    </div>
+        
+
+                    <div className="contFF">
+                        <label htmlFor="fechaFin">Fecha fin: </label>
+                        <input type="datetime-local" id="fechaFin" onChange={(e)=>{setFechaFin(e.target.value)}}/>            
+                    </div>
+
+                    <div className="establecimiento">
+                        <label htmlFor="establecimiento">Establecimiento: </label>
+                        
+                        <select id="establecimiento" name="establecimiento" value={establecimientoId} onChange={(e)=>{setEstablecimientoId(Number(e.target.value))}}>
+                            <option value="-1" disabled>Selecciona un establecimiento</option>
+
+                            {establecimientos.map((e)=>(
+                                <option key={e.id} value={e.id}>
+                                    {`${e.nombre} ${e.direccion}`}
+                                </option>
+                            ))}
+
+                        </select>           
+                        
+                    </div>
+                </div>
+                <div className="izquierda">
+                    <span id="mensaje">{mensaje}</span>
+                    <button type="submit">Subir horario</button>
+                </div>
             </div>
-  
-
-            <div className="contFF">
-                <label htmlFor="fechaFin">Fecha fin: </label>
-                <input type="datetime-local" id="fechaFin" onChange={(e)=>{setFechaFin(e.target.value)}}/>            
-            </div>
-
-            <div className="establecimiento">
-                <label htmlFor="establecimiento">Establecimiento: </label>
-                
-                <select id="establecimiento" name="establecimiento" value={establecimientoId} onChange={(e)=>{setEstablecimientoId(Number(e.target.value))}}>
-                    <option value="-1" disabled>Selecciona un establecimiento</option>
-
-                    {establecimientos.map((e)=>(
-                        <option key={e.id} value={e.id}>
-                            {`${e.nombre} ${e.direccion}`}
-                        </option>
-                    ))}
-
-                </select>           
-                <p>{mensaje}</p> 
-            </div>
-          
-
-            <button type="submit">Subir horario</button>
+            
 
         </form>
     

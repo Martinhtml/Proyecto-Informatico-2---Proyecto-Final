@@ -17,6 +17,14 @@ function EditarP(){
 
             e.preventDefault()
 
+            for (let i = 0; i < nombre.length; i++) {
+                if (!isNaN(nombre[i]) && nombre[i] !== ' ' || nombre[i]  === " ")
+                    return setMensaje("Escriba bien el nombre")
+            }
+            for (let i = 0; i < apellido.length; i++) {
+                if (!isNaN(apellido[i]) && apellido[i] !== ' ')
+                    return setMensaje("Escriba bien el apellido")
+            }
 
             const token = localStorage.getItem("token")
             const respuesta = await axios.patch("http://localhost:3000/user/editProf", {nombre, apellido}, 
