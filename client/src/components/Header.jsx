@@ -50,29 +50,29 @@ function Header() {
             <div id='ContenedorTitulo'> 
                 <Link to="/">Gestor de Turnos</Link> 
             </div>
-        <div className='ContenedorMedio'>
-                {!token ? (
-                <p></p>
-            ) : (
-                <div id='ContenedorTurnos'>
-                    <h2>CrearTurno</h2>
-                    <h2>VerTurno</h2>
-                </div>
-            )}
+            <div className='ContenedorMedio'>
+                    {!token ? (
+                    <p></p>
+                ) : (
+                    <div id='ContenedorTurnos'>
+                        <Link to="/subirDispo">Crear Turno</Link>
+                        <Link to="/verTurno">Ver Turno</Link>
+                    </div>
+                )}
 
-        </div>
-        <div className="contenedor-derecha">
-            {!token ? (
-                <nav className="botones-autenticacion">
-                    <Link to="/login">Iniciar sesión</Link>
-                    <Link to="/registro">Registrarse</Link>
-                </nav>
-            ) : (
-                <div id='ContenedorSaludo'>
-                    <Link to="/perfil">Bienvenido, {nombre}</Link>
-                </div>
-            )}
-        </div>
+            </div>
+            <div className="contenedor-derecha">
+                {!token ? (
+                    <nav className="botones-autenticacion">
+                        <Link to="/login">Iniciar sesión</Link>
+                        <Link to="/registro">Registrarse</Link>
+                    </nav>
+                ) : (
+                    <div id='ContenedorSaludo'>
+                        <Link to="/perfil">Bienvenido, {nombre}</Link>
+                    </div>
+                )}
+            </div>
         </header>
 
     )

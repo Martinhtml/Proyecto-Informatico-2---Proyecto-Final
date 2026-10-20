@@ -44,8 +44,24 @@ const subirDisponibilidad = async(req, res)=>{
 }
 
 
+const getDispos = async(req, res)=>{
+    try{
+        const dispos = await Disponibilidad.findAll({attributes : {exclude : ["DigitoVHDisponibilidad"]}})
+        if (dispos.length === 0){
+            return res.status(400).json(["No hay disponibilidades por el momento"])
+        }
+        console.log(dispos)
+        return res.status(200).json(dispos)
+
+    }catch(error){
+        return res.status(500).json(error)
+    }
+}
+
+
 
 module.exports = {
-    subirDisponibilidad
+    subirDisponibilidad,
+    getDispos
 
 }

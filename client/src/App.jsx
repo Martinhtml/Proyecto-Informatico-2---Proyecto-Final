@@ -12,7 +12,7 @@ import LogOut from "./components/LogOut"
 import Perfil from './components/Perfil'
 import EditarP from './components/EditarP'
 import SubirDispo from './components/SubirDispo'
-
+import VerTurno from './components/VerTurno'
 
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
           <Route path="/perfil" element={<Perfil/>}/>
           <Route path="/editP" element={<EditarP/>}/>
           <Route path='/subirDispo' element={<SubirDispo/>}/>
+          <Route path="/verTurno" element={<VerTurno/>}/>
         </Route>
         
       </Routes>
