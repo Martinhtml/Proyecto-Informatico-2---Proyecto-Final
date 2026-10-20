@@ -11,7 +11,7 @@ import Home from "./components/Home"
 import LogOut from "./components/LogOut"
 import Perfil from './components/Perfil'
 import EditarP from './components/EditarP'
-import SubirDispo from './components/subirDispo'
+import SubirDispo from './components/SubirDispo'
 
 
 
