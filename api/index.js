@@ -46,7 +46,7 @@ server.listen(3000, async ()=>{
     await User.create({ "nombre": "Martin", "apellido": "Donnari", "email": "donnari.martinet36@gmail.com", "contraseña": (await bcrypt.hash("1234", 12)), "dni": 49123638, "DigitoVHUser": "1234567890" })
     await Establecimiento.create({"nombre" : "Cemic", "direccion" : "Galvan 3300"})
 
-    await seedRoles();
-    const martin = await User.create({ "nombre": "Martin", "apellido": "Donnari", "email": "donnari.martinet36@gmail.com", "contraseña": (await bcrypt.hash("1234", 12)), "dni": 49123638, "DigitoVHUser": "1234567890" })
-    await asignarRolNombre(martin.id, "administrador");
+    // await seedRoles();
+    // const martin = await User.create({ "nombre": "Martin", "apellido": "Donnari", "email": "donnari.martinet36@gmail.com", "contraseña": (await bcrypt.hash("1234", 12)), "dni": 49123638, "DigitoVHUser": "1234567890" })
+    // await asignarRolNombre(martin.id, "administrador");
 })
