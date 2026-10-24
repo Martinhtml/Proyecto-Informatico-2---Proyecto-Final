@@ -24,4 +24,5 @@ const usuarioTienePermiso = async (usuarioID, tabla, accion) => {
     return accesos.permisos.has(`${tabla}:${accion}`)
 }
 
+
 module.exports = { obtenerAccesos, usuarioTienePermiso }

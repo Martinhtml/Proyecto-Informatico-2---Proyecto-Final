@@ -23,6 +23,17 @@ const verificarToken = async(req, res)=>{
     }
 }
 
-module.exports = {auth, verificarToken};
+
+const usuarioTienePermisoFront = async (req, res) => {
+    const usuarioID = req.user.id
+    const {tabla, accion} = req.params
+    const accesos = await obtenerAccesos(usuarioID)
+    if (!accesos) return false
+    return accesos.permisos.has(`${tabla}:${accion}`)
+}
+
+
+
+module.exports = {auth, verificarToken, usuarioTienePermisoFront};
 
 

@@ -39,5 +39,80 @@
     display: flex;
     padding: 20px;
     
+    flex-direction: column;
+
+    align-items: center;
     overflow: auto;
+    gap: 30px;
+}
+
+.contTurnos div .DispoTarjeta{
+    display: flex;
+
+    height: 200px;
+    width: 630px;
+    background-color: #115fa8;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 5px;
+    padding: 10px;
+}
+
+.DispoTarjeta .parteIzquierda{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+    height: 100%;
+    padding-right: 10px;
+}
+
+.DispoTarjeta .parteDerecha{
+    display: flex;
+
+    flex-direction: column;
+    gap: 20px;
+
+    width: 50%;
+    height: 100%;
+}
+
+.DispoTarjeta div h1{
+    color: #72e97c;
+    font-size: 23px;
+
+}
+.DispoTarjeta div h2{
+    color: #72e97c;
+    font-size: 20px;
+}
+
+.DispoTarjeta button{
+    display: flex;
+    
+
+    appearance: none;
+    border: none;
+
+
+    cursor: pointer;          
+    background-color: #0d5c75;
+    align-self: center;
+    width: 200px;
+    height: 20px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: bold;
+    transition: all 0.3s ease; 
+
+}
+
+.DispoTarjeta button:hover{
+    background-color: #2c3e50;
+    transform:scale(1.1);
+
 }

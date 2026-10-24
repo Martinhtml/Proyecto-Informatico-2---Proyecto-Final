@@ -22,18 +22,26 @@ function App() {
   const [actualizacion, setActualizacion] = useState(0);
   const [tValido, setTValido] = useState(false);
 
-    const verificarToken = async(tokenActual)=>{
-      try{
-        const response = await axios.get("http://localhost:3000/auth/validarToken", {headers: {authorization: `Bearer ${tokenActual}`}})
-        if (response.data){
-          setTValido(true);
-        }else {
-          setTValido(false);
-        }
-      }catch(error){
+  const verificarToken = async(tokenActual)=>{
+    try{
+      const response = await axios.get("http://localhost:3000/auth/validarToken", {headers: {authorization: `Bearer ${tokenActual}`}})
+      if (response.data){
+        setTValido(true);
+      }else {
         setTValido(false);
       }
+    }catch(error){
+      setTValido(false);
     }
+  }
+
+  const verPermisos = async()=>{
+    try{
+      const response = await axios.get
+    }catch(error){
+
+    }
+  }
 
   useEffect(()=>{
 
@@ -57,8 +65,8 @@ function App() {
 
 
   useEffect(()=>{
-    if(token){
-      //Ver permisos
+    if(tValido){
+
     }else{
 
     }
@@ -81,6 +89,7 @@ function App() {
             <Route path="logout" element={<LogOut/>}/>
             <Route path="/perfil" element={<Perfil/>}/>
             <Route path="/editP" element={<EditarP/>}/>
+            {}
             <Route path='/subirDispo' element={<SubirDispo/>}/>
             <Route path="/verTurno" element={<VerTurno/>}/>
           </>}

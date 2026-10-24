@@ -10,6 +10,19 @@ const buscarEstablecimientos = async(req, res)=>{
         
 }
 
+const buscarEstablecimientoID = async(req, res)=>{
+    try{
+        const estID = req.params.id
+        const establecimiento = await Establecimiento.findByPk(estID)
+        res.status(200).json(establecimiento) 
+    }catch(error){
+        return res.status(500).json(error)
+    }
+        
+}
+
+
 module.exports = {
-    buscarEstablecimientos
+    buscarEstablecimientos,
+    buscarEstablecimientoID
 }
