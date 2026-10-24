@@ -2,6 +2,9 @@ const {Rol, User} = require('../models/index')
 const { registrarEventoBitacora } = require('./bitacoraController')
 
 
+const ROL_SUPER = "superadministrador"
+
+const esSuperadmin = (req) => req.user.roles.includes(ROL_SUPER)
 
 
 const asignarRolNombre = async (usuarioID, nombreRol) => {
@@ -56,6 +59,10 @@ const asignarRolAUsuario = async (req, res) => {
         if (!usuario || !rol) {
             return res.status(404).json({ message: "Usuario o rol no encontrado" })
         }
+
+        if (rol.nombre === ROL_SUPER && !esSuperadmin(req)) {
+            return res.status(403).json({ message: "Solo un superadministrador puede asignar ese rol" })
+        }
  
         if (await usuario.hasRol(rol)) {
             return res.status(409).json({ message: "El usuario ya tiene ese rol" })
@@ -88,14 +95,18 @@ const quitarRolDeUsuario = async (req, res) => {
         if (!usuario || !rol) {
             return res.status(404).json({ message: "Usuario o rol no encontrado" })
         }
+
+         if (rol.nombre === ROL_SUPER && !esSuperadmin(req)) {
+            return res.status(403).json({ message: "Solo un superadministrador puede quitar ese rol" })
+        }
  
         if (!(await usuario.hasRol(rol))) {
             return res.status(404).json({ message: "El usuario no tiene ese rol" })
         }
  
         
-        if (rol.nombre === "administrador" && (await rol.countUsers()) <= 1) {
-            return res.status(400).json({ message: "No se puede quitar el rol al único administrador" })
+        if (rol.nombre === ROL_SUPER && (await rol.countUsers()) <= 1) {
+            return res.status(400).json({ message: "No se puede quitar el rol al único superadministrador" })
         }
  
         await usuario.removeRole(rol)
