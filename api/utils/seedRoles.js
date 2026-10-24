@@ -31,7 +31,14 @@ const ROLES = {
     'Disponibilidad:read', 'Disponibilidad:create', 'Disponibilidad:delete',
     'Turnos:read', 'Turnos:update'
   ],
-  administrador: '*'
+  administrador: [
+    'Disponibilidad:create', 'Disponibilidad:read', 'Disponibilidad:update', 'Disponibilidad:delete',
+    'Turnos:create', 'Turnos:read', 'Turnos:update', 'Turnos:delete',
+    'Usuarios:read', 'Usuarios:update', 'Usuarios:delete',
+    'Roles:create', 'Roles:read', 'Roles:update', 'Roles:delete',
+    'Bitacora:read'
+  ],
+  superadministrador: '*'
 }
 
 const seedRoles = async () => {

@@ -16,7 +16,7 @@ const tienePermiso = (tabla, accion) => async (req,res,next) =>{ //next: es una 
         }
 
         const permisos = new Set(
-            usuario.Roles.map((rol) => rol.Permisos.map((p) => `${p.tabla}:${p.accion}`))
+            usuario.Roles.flatmap((rol) => rol.Permisos.map((p) => `${p.tabla}:${p.accion}`))
         )
 
         if (!permisos.has(`${tabla}:${accion}`)) {
@@ -28,4 +28,4 @@ const tienePermiso = (tabla, accion) => async (req,res,next) =>{ //next: es una 
     }
 }
 
-module.exports = { tienePermiso }
+module.exports = { tienePermiso }     
