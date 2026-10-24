@@ -20,7 +20,6 @@ function SubirDispo(){
 
             const respuesta = await axios.get("http://localhost:3000/establecimientos/getEstablecimientos")
             setEstablecimientos(respuesta.data)
-            console.log(respuesta.data);
 
         }catch(error){
             console.log(error)
@@ -52,7 +51,6 @@ function SubirDispo(){
                 {"fechaInicio" : fechaIn, "fechaFin":fechaFin, "establecimientoID" : establecimientoId}, 
                 {headers : {authorization : `Bearer ${token}`}})
 
-            console.log(respuesta.data)
             navigate("/")
 
 

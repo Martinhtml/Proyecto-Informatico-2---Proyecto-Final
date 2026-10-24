@@ -10,23 +10,40 @@ function Header() {
     const [nombre, setNombre] = useState("");
     const [actualizacion, setActualizacion] = useState(0);
 
+    const [tValido, setTValido] = useState(false);
 
-    const obtenerNombreUsuario = async () => {
+    const verificarToken = async(tokenActual)=>{
+        try{
+            const response = await axios.get("http://localhost:3000/auth/validarToken", {headers: {authorization: `Bearer ${tokenActual}`}})
+            if (response.data){
+                setTValido(true);
+            }else {
+                setTValido(false);
+            }
+        }catch(error){
+            setTValido(false);
+        }
+    }
+
+    const obtenerNombreUsuario = async (tokenActual) => {
         const response = await axios.get("http://localhost:3000/user/obtenerNombreUsuario", {
-            headers: {authorization: `Bearer ${token}`}
+            headers: {authorization: `Bearer ${tokenActual}`}
         });
         setNombre(response.data);
     }
 
     useEffect(()=>{
 
-        const actualizarToken =()=>{
+        const actualizarToken = async()=>{
 
-            setToken(localStorage.getItem("token") || "");
+            const nuevoToken = localStorage.getItem("token") || "";
+            setToken(nuevoToken)
+            await verificarToken(nuevoToken);
+
             setActualizacion(prev => prev + 1);
 
         }
-
+        actualizarToken();
         window.addEventListener("TokenActualizado", actualizarToken);
 
         return () => {
@@ -34,14 +51,16 @@ function Header() {
     }
     }, [])
 
+    
+
     useEffect(()=>{
-        if(token){
-            obtenerNombreUsuario();
+        if(tValido){
+            obtenerNombreUsuario(token);
             console.log("hola")
         }else{
             setNombre("");
         }
-    }, [token, actualizacion])
+    }, [tValido, actualizacion])
 
     return (
         <header>
@@ -51,7 +70,7 @@ function Header() {
                 <Link to="/">Gestor de Turnos</Link> 
             </div>
             <div className='ContenedorMedio'>
-                    {!token ? (
+                    {!tValido ? (
                     <p></p>
                 ) : (
                     <div id='ContenedorTurnos'>
@@ -62,7 +81,7 @@ function Header() {
 
             </div>
             <div className="contenedor-derecha">
-                {!token ? (
+                {!tValido ? (
                     <nav className="botones-autenticacion">
                         <Link to="/login">Iniciar sesión</Link>
                         <Link to="/registro">Registrarse</Link>

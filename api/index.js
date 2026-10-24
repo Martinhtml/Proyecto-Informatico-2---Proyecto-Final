@@ -18,6 +18,8 @@ const turnosRoutes = require("./routes/turnosRoutes");
 const dispoRoutes = require("./routes/disponibilidadRoutes")
 const estableRoutes = require("./routes/establecimientosRoutes.js")
 const rolRoutes = require("./routes/rolRoutes");
+const authRoutes = require("./routes/authRoutes.js")
+
 
 server.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
@@ -34,8 +36,12 @@ server.use("/user", userRoutes);
 server.use("/turnos", turnosRoutes);
 server.use("/disponibilidad", dispoRoutes);
 server.use("/establecimientos", estableRoutes);
+server.use("/auth", authRoutes);
+
 
 server.use("/roles", rolRoutes);  
+
+
 
 
 server.listen(3000, async ()=>{

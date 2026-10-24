@@ -12,6 +12,17 @@ const auth = async (req, res, next) => {
     }
 }
 
-module.exports = auth;
+
+const verificarToken = async(req, res)=>{
+    try{
+        const token = req.headers["authorization"].split(' ')[1];
+        const decode = jwt.verify(token, "Proyecto Informatico II");
+        return res.status(200).json(decode)
+    }catch(error){
+        return res.status(401).json(error)
+    }
+}
+
+module.exports = {auth, verificarToken};
 
 
