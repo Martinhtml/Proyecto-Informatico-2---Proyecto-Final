@@ -51,7 +51,7 @@ function SubirDispo(){
                 {"fechaInicio" : fechaIn, "fechaFin":fechaFin, "establecimientoID" : establecimientoId}, 
                 {headers : {authorization : `Bearer ${token}`}})
 
-            navigate("/")
+            navigate("/verTurno")
 
 
 

@@ -14,6 +14,7 @@ import EditarP from './components/EditarP'
 import SubirDispo from './components/SubirDispo'
 import VerTurno from './components/VerTurno'
 import axios from 'axios'
+import EliminarCuenta from './components/eliminarCuenta'
 
 
 function App() {
@@ -103,6 +104,7 @@ function App() {
             <Route path="/editP" element={<EditarP/>}/>
             {permisos.subirDispo && <Route path='/subirDispo' element={<SubirDispo/>}/> }
             <Route path="/verTurno" element={<VerTurno/>}/>
+            <Route path="/eliminarCuenta" element={<EliminarCuenta/>}/>
           </>}
           
 

@@ -25,6 +25,10 @@ function Perfil(){
         navigate("/editP") 
     }
 
+    const llevarEliminarCuenta = ()=>{
+        navigate("/eliminarCuenta")
+    }
+
     const obtenerNombreUsuario = async () => {
         const token = localStorage.getItem("token")
         const response = await axios.get("http://localhost:3000/user/obtenerUsuario", {
@@ -65,6 +69,8 @@ function Perfil(){
             </div>
             <button className="editarPerfil" onClick={llevarEditarPerfil}>Editar perfil ✎</button>
             <button className="cerrarSesion" onClick={llevarLogout}>Cerrar Sesion</button>
+            <button className="cerrarSesion" onClick={llevarEliminarCuenta}>Eliminar mi cuenta</button>
+
         </div>
     
     </div>)

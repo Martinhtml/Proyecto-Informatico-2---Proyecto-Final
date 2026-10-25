@@ -168,12 +168,45 @@ const editarUser = async (req, res)=>{
 }
 
 
+const borrarCuenta = async(req, res)=>{
+    try{
+        const userID = req.user.id
+        const {contra} =  req.body
+        const user = await User.findByPk(userID)
+        if (!user) return res.status(400).json({message : "No existe el user"})
+        if (!await bcrypt.compare(contra, user.contraseña)) return res.status(401).json("Credenciales incorrectas")
+
+        await registrarEventoBitacora({
+            idUser : userID,
+            accion : "ELIMINACION DE CUENTA",
+            descripcion : `El usuario ${user.nombre} ${user.apellido} ha eliminado su cuenta`
+        })
+
+        await User.destroy({where : {id : userID}})
+
+
+
+        let dvhsTot = await User.findAll({attributes : ['DigitoVHUser']});
+        dvhsTot = dvhsTot.map((a)=>a.DigitoVHUser)
+
+        await calcularDVV("users", dvhsTot)
+
+
+        return res.status(200).json({"message" : "Usuario borrado"})
+    }catch(error){
+        return res.status(500).json(error)
+    }   
+
+}
+
+
 module.exports = { 
     iniciarSesion,
     register,
     obtenerNombreUsuario,
     obtenerUsuario,
     editarUser,
-    obtenerDatosUsuario
+    obtenerDatosUsuario,
+    borrarCuenta
 
  };
