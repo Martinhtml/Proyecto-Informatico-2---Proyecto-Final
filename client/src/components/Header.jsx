@@ -12,6 +12,27 @@ function Header() {
 
     const [tValido, setTValido] = useState(false);
 
+
+    const [permisos, setPermisos]= useState({})
+
+    const cargarPermisos = async(tokenActual)=>{
+        const permisos = {
+            subirDispo : await puedeUsar("Disponibilidad", "create", tokenActual)
+        }
+        setPermisos(permisos)
+    }
+    
+    const puedeUsar = async(tabla, accion, tokenActual)=>{
+        try{
+            const response = await axios.get(`http://localhost:3000/auth/verPermiso/${tabla}/${accion}`, {headers:{authorization:`Bearer ${tokenActual}`}})
+            return response.data
+        }catch(error){
+            console.log(error)
+            return false;
+        }
+    }
+
+
     const verificarToken = async(tokenActual)=>{
         try{
             const response = await axios.get("http://localhost:3000/auth/validarToken", {headers: {authorization: `Bearer ${tokenActual}`}})
@@ -56,11 +77,12 @@ function Header() {
     useEffect(()=>{
         if(tValido){
             obtenerNombreUsuario(token);
-            console.log("hola")
+            cargarPermisos(token)
         }else{
             setNombre("");
+            setPermisos({})
         }
-    }, [tValido, actualizacion])
+    }, [tValido, actualizacion, token])
 
     return (
         <header>
@@ -74,7 +96,9 @@ function Header() {
                     <p></p>
                 ) : (
                     <div id='ContenedorTurnos'>
-                        <Link to="/subirDispo">Crear Turno</Link>
+                        {
+                            permisos.subirDispo && <Link to="/subirDispo">Crear Turno</Link>
+                        }
                         <Link to="/verTurno">Ver Turno</Link>
                     </div>
                 )}

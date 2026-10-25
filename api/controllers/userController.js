@@ -9,7 +9,7 @@ const DVV = require('../models/DVVModel')
 const {registrarEventoBitacora} = require('./bitacoraController');
 const {inicioSesion} = require('./inicioSesionController');
 const { Op } = require('sequelize');
-
+const {asignarRolNombre} = require("./rolController")
 
 const iniciarSesion = async (req, res) => {
     try{
