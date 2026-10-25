@@ -98,6 +98,7 @@ const register = async (req,res) => {
             DigitoVHUser : dvh
         })
         
+        await asignarRolNombre(createdUser.id, "paciente")
         let dvhsTot = await User.findAll({attributes : ['DigitoVHUser']});
         dvhsTot = dvhsTot.map((a)=>a.DigitoVHUser)
         await calcularDVV("users", dvhsTot)
