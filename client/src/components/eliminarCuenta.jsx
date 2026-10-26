@@ -27,16 +27,16 @@ function EliminarCuenta(){
                     headers : {authorization : `Bearer ${token}`}
                 })
             
+            localStorage.removeItem("token")
+            window.dispatchEvent(new Event("TokenActualizado"))
 
+        navigate("/registro")
         }catch(error){
             console.log(error)
             setError(0)
             setConfirmacion(0)
         }
-        localStorage.removeItem("token")
-        window.dispatchEvent(new Event("TokenActualizado"))
-
-        navigate("/registro")
+        
     }
 
 
