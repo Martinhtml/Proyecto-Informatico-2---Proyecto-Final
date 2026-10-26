@@ -37,6 +37,34 @@ const iniciarSesion = async (req, res) => {
     }
 }
 
+const iniciarSesionMedico = async (req,res) =>{
+    try{
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ where : { email : email } });
+
+         if(!user || !(await bcrypt.compare(password, user.contraseña))){
+            return res.status(401).json({ message: "Credenciales incorrectas" });
+        }
+        
+        const roles = await user.getRoles();
+         if(!roles.some((rol) => rol.nombre === "medico")){
+            return res.status(403).json({ message: "Esta cuenta no tiene rol de medico" });
+        }
+
+        await inicioSesion(user.id);
+        await registrarEventoBitacora({
+            idUser: user.id,
+            accion: 'INICIO DE SESION MEDICO',
+            descripcion: `El usuario ${email} inició sesión como médico`,
+        });
+        const token = await jwt.sign({id: user.id, email: user.email, modo: "medico"}, "Proyecto Informatico II", { expiresIn: "365d" });
+        res.status(200).json(token);
+    }catch(error){
+        return res.status(500).json({ error: error.message });
+    }
+
+}
 
 const obtenerNombreUsuario = async (req, res) => {
     try {
@@ -202,6 +230,7 @@ const borrarCuenta = async(req, res)=>{
 
 module.exports = { 
     iniciarSesion,
+    iniciarSesionMedico,
     register,
     obtenerNombreUsuario,
     obtenerUsuario,

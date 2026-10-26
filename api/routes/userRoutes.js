@@ -1,7 +1,7 @@
 const {Router} = require("express")
 
 const {auth} = require("../middlewares/auth");
-const {iniciarSesion, register, obtenerNombreUsuario, obtenerUsuario, editarUser, obtenerDatosUsuario, borrarCuenta} = require("../controllers/userController");
+const {iniciarSesion,iniciarSesionMedico, register, obtenerNombreUsuario, obtenerUsuario, editarUser, obtenerDatosUsuario, borrarCuenta} = require("../controllers/userController");
 
 
 const router = Router();
@@ -9,6 +9,7 @@ const router = Router();
 
 router.post("/register", register);
 router.post("/login", iniciarSesion);
+router.post("/loginMedico", iniciarSesionMedico)
 
 
 

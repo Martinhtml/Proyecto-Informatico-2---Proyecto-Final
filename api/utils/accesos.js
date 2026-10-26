@@ -1,5 +1,7 @@
 const { User, Rol, Permisos } = require('../models/index')
 
+const ROL_MODO = "medico"
+
 const obtenerAccesos = async (usuarioID) => {
     const usuario = await User.findByPk(usuarioID, {
         include: [{
@@ -9,10 +11,11 @@ const obtenerAccesos = async (usuarioID) => {
         }]
     })
 
+    const roles = usuario.Roles.filter((rol) => rol.nombre !== ROL_MODO || modo === "medico")
     return {
-        roles: usuario.Roles.map((rol) => rol.nombre),
+        roles: usuario.roles.map((rol) => rol.nombre),
         permisos: new Set(
-            usuario.Roles.flatMap((rol) => rol.Permisos.map((p) => `${p.tabla}:${p.accion}`))
+            usuario.roles.flatMap((rol) => rol.Permisos.map((p) => `${p.tabla}:${p.accion}`))
         )
     }
 }
