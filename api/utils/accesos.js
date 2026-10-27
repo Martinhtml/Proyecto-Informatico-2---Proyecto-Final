@@ -10,12 +10,15 @@ const obtenerAccesos = async (usuarioID) => {
             include: [{ model: Permisos, through: { attributes: [] } }]
         }]
     })
+    
+    if (!usuario) return null
 
-    const roles = usuario.Roles.filter((rol) => rol.nombre !== ROL_MODO || modo === "medico")
+    const roles = usuario.Roles || []
+    
     return {
-        roles: usuario.roles.map((rol) => rol.nombre),
+        roles: roles.map((rol) => rol.nombre),
         permisos: new Set(
-            usuario.roles.flatMap((rol) => rol.Permisos.map((p) => `${p.tabla}:${p.accion}`))
+            roles.flatMap((rol) => rol.Permisos.map((p) => `${p.tabla}:${p.accion}`))
         )
     }
 }

@@ -29,6 +29,8 @@ function App() {
     const permisos = {
       subirDispo : await puedeUsar("Disponibilidad", "create", tokenActual)
     }
+    console.log("Permisos cargados:", permisos);
+
     setPermisos(permisos)
   }
 
