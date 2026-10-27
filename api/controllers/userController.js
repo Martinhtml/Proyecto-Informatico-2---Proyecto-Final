@@ -275,8 +275,8 @@ const enviarMail = async (req, res)=>{
             host : "live.smtp.mailtrap.io",
             port : "587",
             auth : {
-                user : "smtp@mailtrap.io",
-                pass : "ebd176d733844dc7ee6e8c4a56b9adb7"
+                user : "gmail.com",
+                pass : "qpiw ttvf jxtl aqfa"
             }
         })
         const confMail= {

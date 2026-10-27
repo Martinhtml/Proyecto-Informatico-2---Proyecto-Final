@@ -34,9 +34,15 @@ function Footer() {
                     <h3>Contacto: </h3>
                     <div className="Iconos">
                         <br />
-                        <img src={iconoIG} alt="Instagram"/>
-                        <img src={iconoYT} alt="Youtube"/>
-                        <img src={iconoWSP} alt="Whatsapp"/>
+                        <a href="https://www.instagram.com/_martin_2237?dlrfY3pxZGRldjV2b200">
+                            <img src={iconoIG} alt="Instagram"/>
+                        </a>
+                        <a href="https://www.youtube.com/@MartinDonnari">
+                            <img src={iconoYT} alt="Youtube"/>
+                        </a>
+                        <a href="https://web.whatsapp.com/">
+                            <img src={iconoWSP} alt="Whatsapp"/>
+                        </a>
                         
                     </div>
 
