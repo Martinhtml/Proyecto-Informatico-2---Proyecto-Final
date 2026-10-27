@@ -267,12 +267,33 @@ const cambiarPassword = async(req, res)=>{
 
 
 const enviarMail = async (req, res)=>{
-    const transportador = {
-        service : "gmail",
-        auth
-    }
-}
+    try{
 
+        const mail = req.user.email;
+        const tokenRecuperacion = crypto.randomInt(10000, 100000).toString();
+        const transportador = nodemailer.createTransport({
+            host : "live.smtp.mailtrap.io",
+            port : "587",
+            auth : {
+                user : "smtp@mailtrap.io",
+                pass : "ebd176d733844dc7ee6e8c4a56b9adb7"
+            }
+        })
+        const confMail= {
+            from : '"miApp" donnari.martinet36@gmail.com',
+            to : mail,
+            subject : "Recuperacion de cuenta",
+            text : `Tu token de reinicio de contraseña es: ${tokenRecuperacion}`
+        }
+
+        await transportador.sendMail(confMail);
+        return res.status(200).json({"message" : "Mail enviado con exito"})
+    }catch(error){
+        return res.status(500).json(error);
+    }
+
+}
+//Token mailTrap ebd176d733844dc7ee6e8c4a56b9adb7
 
 module.exports = { 
     iniciarSesion,
@@ -283,6 +304,7 @@ module.exports = {
     editarUser,
     obtenerDatosUsuario,
     borrarCuenta,
-    cambiarPassword
+    cambiarPassword,
+    enviarMail
 
  };
