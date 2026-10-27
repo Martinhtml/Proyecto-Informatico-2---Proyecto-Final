@@ -15,7 +15,7 @@ import SubirDispo from './components/SubirDispo'
 import VerTurno from './components/VerTurno'
 import axios from 'axios'
 import EliminarCuenta from './components/eliminarCuenta'
-
+import CambiarContra from "./components/cambiarContraseña"
 
 function App() {
 
@@ -107,6 +107,7 @@ function App() {
             {permisos.subirDispo && <Route path='/subirDispo' element={<SubirDispo/>}/> }
             <Route path="/verTurno" element={<VerTurno/>}/>
             <Route path="/eliminarCuenta" element={<EliminarCuenta/>}/>
+            <Route path="/cambiarContra" element={<CambiarContra/>}/>
           </>}
           
 

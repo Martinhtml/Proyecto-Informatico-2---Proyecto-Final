@@ -172,7 +172,7 @@ const editarUser = async (req, res)=>{
 
         user.DigitoVHUser = dvh
         
-        let dvhsTot = await User.findAll({where : {id : {[Op.ne] : userID}}}, {attributes : ['DigitoVHUser']});
+        let dvhsTot = await User.findAll({where : {id : {[Op.ne] : userID}}, attributes : ['DigitoVHUser']});
         dvhsTot = dvhsTot.map((a)=>a.DigitoVHUser)
         dvhsTot.push(dvh)
 
@@ -235,7 +235,7 @@ const cambiarPassword = async(req, res)=>{
         if (!passVieja || !nuevaPass) return res.status(400).json({"message" : "Faltan datos"});
         const user = await User.findByPk(userID);
         if (!user) return res.status(404).json({"message" : "El user no existe"});
-        if (await bcrypt.compare(passVieja, user.contraseña)) return res.status(401).json({"message" : "Contraseña incorrecta"});
+        if (!(await bcrypt.compare(passVieja, user.contraseña))) return res.status(401).json({"message" : "Contraseña incorrecta"});
         const nuevaPassHash = await bcrypt.hash(nuevaPass, 12);
         user.contraseña = nuevaPassHash;
 
@@ -243,7 +243,7 @@ const cambiarPassword = async(req, res)=>{
 
         user.DigitoVHUser = dvh
         
-        let dvhsTot = await User.findAll({where : {id : {[Op.ne] : userID}}}, {attributes : ['DigitoVHUser']});
+        let dvhsTot = await User.findAll({where : {id : {[Op.ne] : userID}}, attributes : ['DigitoVHUser']});
         dvhsTot = dvhsTot.map((a)=>a.DigitoVHUser)
         dvhsTot.push(dvh)
 

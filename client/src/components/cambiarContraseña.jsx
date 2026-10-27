@@ -1,6 +1,7 @@
+import axios from "axios";
 import "./cambiarContraseña.css"
 import { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 
 function CambiarContra(){
 
@@ -10,10 +11,25 @@ function CambiarContra(){
     const [mensaje, setMensaje] = useState("Introduzca una contraseña")
 
 
+
+    const cambiarPass = async(e)=>{
+        e.preventDefault()
+        try{
+            const token = localStorage.getItem("token")
+            const response = await axios.patch("http://localhost:3000/user/cambiarPass", {passVieja : viejaPass, nuevaPass}, 
+                {headers : {authorization : `Bearer ${token}`}});
+
+        }catch(error){
+            console.log(error)
+        }
+            
+
+    }
+
     const cambiarMensaje = ()=>{
-        if (viejaPass.length < 4) setMensaje("Vieja contraseña muy corta");
-        if (nuevaPass.length < 4) setMensaje("La contraseña es muy corta");
-        if (nuevaPass !== passConf) setMensaje("Las contraseñas no coinciden");
+        if (viejaPass.length < 4) return setMensaje("Vieja contraseña muy corta");
+        if (nuevaPass.length < 4) return setMensaje("La contraseña es muy corta");
+        if (nuevaPass !== passConf) return setMensaje("Las contraseñas no coinciden");
         else setMensaje("Correcto")
     }
 
@@ -30,20 +46,27 @@ function CambiarContra(){
                     <h1>Cambiar Contraseña</h1>
                 </div>
                 <div id="contDatos">
-                    <label htmlFor="ViejaPass">Introduzca su antigua contraseña:</label>
-                    <input placeholder="Vieja contraseña" type="password" id="viejaPass" onChange={(e) => setViejaPass(e.target.value)}/>
-                    <label htmlFor="NuevaPass">Introduzca su nueva contraseña:</label>
-                    <input placeholder="Nueva contraseña" type="password" id="nuevaPass" onChange={(e) => setNuevaPass(e.target.value)}/>
-                    <label htmlFor="passConf">Confirma su contraseña:</label>
-                    <input placeholder="Confirma la contraseña" type="password" id="passConf" onChange={(e) => setPassConf(e.target.value)}/>
-                    {mensaje == "Correcto" ? <button type="submit">Confirmar</button> : <p>{mensaje}</p>}
+                    <div>
+                        <label htmlFor="viejaPass">Introduzca su antigua contraseña:</label>
+                        <input placeholder="Vieja contraseña" type="password" id="viejaPass" onChange={(e) => setViejaPass(e.target.value)}/>
+                    </div>
+                    <div>
+                        <label htmlFor="nuevaPass">Introduzca su nueva contraseña:</label>
+                        <input placeholder="Nueva contraseña" type="password" id="nuevaPass" onChange={(e) => setNuevaPass(e.target.value)}/>
+                    </div>
+                    <div>
+                        <label htmlFor="passConf">Confirma su contraseña:</label>
+                        <input placeholder="Confirma la contraseña" type="password" id="passConf" onChange={(e) => setPassConf(e.target.value)}/>
+                    </div>
+                    
+                    
+                    {mensaje == "Correcto" ? <button type="submit">Confirmar</button> : <span>{mensaje}</span>}
                     
                 </div>
-                
+                <p><Link to="/perfil">Volver</Link></p>
+
 
             </form>
-            <br />
-            <p><Link to="/perfil">Volver</Link></p>
 
     </div>)
 }
