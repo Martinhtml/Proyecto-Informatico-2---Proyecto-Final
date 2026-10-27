@@ -228,6 +228,42 @@ const borrarCuenta = async(req, res)=>{
 }
 
 
+const cambiarPassword = async(req, res)=>{
+    try{
+        const {passVieja, nuevaPass} = req.body;
+        const userID = req.user.id;
+        if (!passVieja || !nuevaPass) return res.status(400).json({"message" : "Faltan datos"});
+        const user = await User.findByPk(userID);
+        if (!user) return res.status(404).json({"message" : "El user no existe"});
+        if (await bcrypt.compare(passVieja, user.contraseña)) return res.status(401).json({"message" : "Contraseña incorrecta"});
+        const nuevaPassHash = await bcrypt.hash(nuevaPass, 12);
+        user.contraseña = nuevaPassHash;
+
+        const dvh = calcularDVH(user.nombre, user.apellido, user.dni, user.email, nuevaPassHash)
+
+        user.DigitoVHUser = dvh
+        
+        let dvhsTot = await User.findAll({where : {id : {[Op.ne] : userID}}}, {attributes : ['DigitoVHUser']});
+        dvhsTot = dvhsTot.map((a)=>a.DigitoVHUser)
+        dvhsTot.push(dvh)
+
+        await calcularDVV("users", dvhsTot)
+
+        await registrarEventoBitacora({
+            idUser: userID,
+            accion: 'CAMBIO DE CONTRASEÑA',
+            descripcion: `El usuario ${userID} cambio su contraseña`
+        })
+
+
+        await user.save();
+        res.status(200).json({"message" : "Contraseña cambiada"})
+    }catch(error){
+        return res.status(500).json(error);
+    }
+}
+
+
 module.exports = { 
     iniciarSesion,
     iniciarSesionMedico,
@@ -236,6 +272,7 @@ module.exports = {
     obtenerUsuario,
     editarUser,
     obtenerDatosUsuario,
-    borrarCuenta
+    borrarCuenta,
+    cambiarPassword
 
  };

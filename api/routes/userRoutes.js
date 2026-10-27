@@ -1,7 +1,7 @@
 const {Router} = require("express")
 
 const {auth} = require("../middlewares/auth");
-const {iniciarSesion,iniciarSesionMedico, register, obtenerNombreUsuario, obtenerUsuario, editarUser, obtenerDatosUsuario, borrarCuenta} = require("../controllers/userController");
+const {iniciarSesion,iniciarSesionMedico, register, obtenerNombreUsuario, obtenerUsuario, editarUser, obtenerDatosUsuario, borrarCuenta, cambiarPassword} = require("../controllers/userController");
 
 
 const router = Router();
@@ -19,7 +19,7 @@ router.get("/getDatosUser/:id", auth, obtenerDatosUsuario);
 
 
 router.patch("/editProf", auth, editarUser);
-
+router.patch("/cambiarPass", auth, cambiarPassword);
 
 router.delete("/eliminarCuenta", auth, borrarCuenta);
 
