@@ -11,6 +11,8 @@ const {inicioSesion} = require('./inicioSesionController');
 const { Op } = require('sequelize');
 const {asignarRolNombre} = require("./rolController")
 
+const nodemailer = require('nodemailer');
+
 const iniciarSesion = async (req, res) => {
     try{
         const { email, password } = req.body;
@@ -260,6 +262,14 @@ const cambiarPassword = async(req, res)=>{
         res.status(200).json({"message" : "Contraseña cambiada"})
     }catch(error){
         return res.status(500).json(error);
+    }
+}
+
+
+const enviarMail = async (req, res)=>{
+    const transportador = {
+        service : "gmail",
+        auth
     }
 }
 

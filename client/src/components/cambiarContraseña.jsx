@@ -1,7 +1,7 @@
 import axios from "axios";
 import "./cambiarContraseña.css"
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function CambiarContra(){
 
@@ -10,7 +10,7 @@ function CambiarContra(){
     const [passConf, setPassConf] = useState("")
     const [mensaje, setMensaje] = useState("Introduzca una contraseña")
 
-
+    const navigate = useNavigate()
 
     const cambiarPass = async(e)=>{
         e.preventDefault()
@@ -18,9 +18,10 @@ function CambiarContra(){
             const token = localStorage.getItem("token")
             const response = await axios.patch("http://localhost:3000/user/cambiarPass", {passVieja : viejaPass, nuevaPass}, 
                 {headers : {authorization : `Bearer ${token}`}});
-
+            navigate("/perfil")
         }catch(error){
             console.log(error)
+            setMensaje("Contraseña Incorrecta")
         }
             
 
