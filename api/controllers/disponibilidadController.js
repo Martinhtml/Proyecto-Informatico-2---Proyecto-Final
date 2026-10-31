@@ -1,8 +1,29 @@
 
-const {Disponibilidad} = require("../models/index.js")
+const {Disponibilidad, Turno} = require("../models/index.js")
 const { calcularDVH } = require("../utils/digitoVerificador")
 const { registrarEventoBitacora } = require("./bitacoraController.js")
 const { calcularDVV } = require("./DVVController.js")
+
+
+const chequearDispo = async(req, res)=>{
+    try{
+        const dispoId = req.params.id
+        if (!dispoId) return res.status(400).json({"message" : "Faltan datos"});
+        const disponibilidad = await Disponibilidad.findByPk(dispoId, {
+            include:{
+                model : Turno,
+                attributes: ["id"]
+            }
+        })
+        if (!disponibilidad) return res.status(200).json(false)
+        if (disponibilidad.Turno) return res.status(200).json(false);
+        else return res.status(200).json(true);
+
+
+    }catch(error){
+        return res.status(500).json(error)
+    }
+}
 
 
 
@@ -62,6 +83,7 @@ const getDispos = async(req, res)=>{
 
 module.exports = {
     subirDisponibilidad,
-    getDispos
+    getDispos,
+    chequearDispo
 
 }

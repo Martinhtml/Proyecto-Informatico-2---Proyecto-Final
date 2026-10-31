@@ -1,6 +1,8 @@
 
 const {Turno, User} = require("../models/index.js")
 const { calcularDVH } = require("../utils/digitoVerificador.js")
+const {registrarEventoBitacora} = require("./bitacoraController.js")
+const {calcularDVV} = require("./DVVController.js")
 
 
 const verTurnosId = async (req, res)=>{

@@ -8,6 +8,6 @@ const router = Router();
 
 router.get("/getTurnosByID", auth,tienePermiso("Turnos","read") , verTurnosId)
 
-router.post("/obtenerTurno/:disponibilidadId", auth, tienePermiso("Turnos", "create"), obtenerTurno)
+router.post("/obtenerTurno/:disponibilidadId", auth, obtenerTurno)
 
 module.exports = router;

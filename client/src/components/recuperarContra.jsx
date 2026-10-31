@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./recuperarContra.css"
 
 import axios from "axios";
@@ -5,11 +6,15 @@ import axios from "axios";
 
 function RecuperarContra(){
 
-    const enviar = async () =>{
-        try{
+    const [email, setEmail] = useState("")
 
-            const respose = await axios.post("http://localhost:3000/user/enviarMail", {mail : "Proba con fennecthefoxx3@gmail.com"})
+    const enviar = async (e) =>{
+        e.preventDefault();
+
+        try{
+            const respose = await axios.post("http://localhost:3000/user/enviarMail", {mail : email})
             console.log(respose.data)
+
         }catch(error){
             console.log(error)
         }
@@ -17,8 +22,23 @@ function RecuperarContra(){
     
     return(<div id="contRecuperarContra">
 
-        <button onClick={enviar}>Mail</button>
+        <form onSubmit={enviar}>
 
+            <div id="tituloContra">
+                <h1>Recuperar Contraseña</h1>
+            </div>
+            <div id="contDatos">
+                <div>
+                    <label htmlFor="email">Introduzca su email:</label>
+                    <input placeholder="email" type="email" id="email" onChange={(e) => setEmail(e.target.value)}/>
+                </div>
+                
+                {email.length >=11 ? <button type="submit">Confirmar</button> : <p>Introduzca un email valido</p>}
+                
+            </div>
+
+
+        </form>
     </div>)
 }
 

@@ -98,6 +98,8 @@ function App() {
         <Route element={<Layout />} path="">
         
           <Route path="" element={<Home/>}/>
+            <Route path="/recuperarContra" element={<RecuperarContra/>}/>
+
           {!tValido ? <>
             <Route path="/login" element={<LogIn />} />
             <Route path="/loginMedico" element={<LogInMedico/>} /> 
@@ -111,7 +113,6 @@ function App() {
             <Route path="/verTurno" element={<VerTurno/>}/>
             <Route path="/eliminarCuenta" element={<EliminarCuenta/>}/>
             <Route path="/cambiarContra" element={<CambiarContra/>}/>
-            <Route path="/recuperarContra" element={<RecuperarContra/>}/>
           </>}
           
 

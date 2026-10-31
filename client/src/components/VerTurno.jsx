@@ -18,8 +18,16 @@ function  VerTurno(){
         try{
             const token = localStorage.getItem("token")
             const response = await axios.get("http://localhost:3000/disponibilidad/getDispos", {headers:{authorization : `Bearer ${token}`}})
-            console.log(response.data)
             setDispos(response.data)
+            return response.data
+        }catch(error){
+            console.log(error)
+        }   
+    }
+
+    const chequearDispo = async(id)=>{
+        try{
+            const response = await axios.get(`http://localhost:3000/disponibilidad/chequearDispo/${id}`)
             return response.data
         }catch(error){
             console.log(error)
@@ -28,14 +36,18 @@ function  VerTurno(){
 
     const cargarDisposInd = async(lista)=>{
         try{
-            console.log("Lista recibida:", lista)
 
             const listaDispos = []
+            if (!lista) return
             for (let i = 0; i < lista.length; i++) {
                 const dispo = lista[i]  
-                const datos = await buscarDatos(dispo)
-                datos.push(dispo.fechaInicio, dispo.fechaFin)
-                listaDispos.push(datos)    
+                const disponible = await chequearDispo(dispo.id)
+                if (disponible){
+                    const datos = await buscarDatos(dispo)
+                    datos.push(dispo.fechaInicio, dispo.fechaFin, dispo.id)
+                    listaDispos.push(datos)    
+                }
+                
             }
             setDisposDatos(listaDispos)
         }catch(error){
@@ -55,6 +67,15 @@ function  VerTurno(){
             console.log(error)
         }
  
+    }
+    const sacarTurno = async(dispoID)=>{
+        try {
+            const token = localStorage.getItem("token")
+            const response = await axios.post(`http://localhost:3000/turnos/obtenerTurno/${dispoID}`, {},{headers: {authorization : `Bearer ${token}`}});
+            cargarDisposInd(dispos)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     useEffect(()=>{
@@ -89,7 +110,8 @@ function  VerTurno(){
                                     <h2>{`Fecha inicio: ${new Date(dispo[2]).toLocaleString("es-Ar", { hour12: false })}`}</h2>
 
                                     <h2>{`Fecha fin: ${new Date(dispo[3]).toLocaleString("es-Ar",{ hour12: false })}`}</h2>
-                                    <button>Reservar Turno</button>
+                                    <button onClick={()=>{
+                                        sacarTurno(dispo[4])}}>Reservar Turno</button>
                                 </div>
 
                             </div>
