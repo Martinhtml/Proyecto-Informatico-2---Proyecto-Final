@@ -269,18 +269,17 @@ const cambiarPassword = async(req, res)=>{
 const enviarMail = async (req, res)=>{
     try{
 
-        const mail = req.user.email;
+        const {mail} = req.body;
         const tokenRecuperacion = crypto.randomInt(10000, 100000).toString();
         const transportador = nodemailer.createTransport({
-            host : "live.smtp.mailtrap.io",
-            port : "587",
+            service : "gmail",
             auth : {
-                user : "gmail.com",
+                user : "donnari.martinet36@gmail.com",
                 pass : "qpiw ttvf jxtl aqfa"
             }
         })
         const confMail= {
-            from : '"miApp" donnari.martinet36@gmail.com',
+            from : '"Gestor de Turnos" <donnari.martinet36@gmail.com>',
             to : mail,
             subject : "Recuperacion de cuenta",
             text : `Tu token de reinicio de contraseña es: ${tokenRecuperacion}`

@@ -11,7 +11,7 @@ router.post("/register", register);
 router.post("/login", iniciarSesion);
 router.post("/loginMedico", iniciarSesionMedico)
 router.post("/recuperarContra", auth, enviarMail)
-
+router.post("/enviarMail", enviarMail);
 
 router.get("/obtenerNombreUsuario", auth, obtenerNombreUsuario);
 router.get("/obtenerUsuario", auth, obtenerUsuario);

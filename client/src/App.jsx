@@ -16,6 +16,7 @@ import VerTurno from './components/VerTurno'
 import axios from 'axios'
 import EliminarCuenta from './components/eliminarCuenta'
 import CambiarContra from "./components/cambiarContraseña"
+import RecuperarContra from "./components/recuperarContra"
 
 function App() {
 
@@ -108,6 +109,7 @@ function App() {
             <Route path="/verTurno" element={<VerTurno/>}/>
             <Route path="/eliminarCuenta" element={<EliminarCuenta/>}/>
             <Route path="/cambiarContra" element={<CambiarContra/>}/>
+            <Route path="/recuperarContra" element={<RecuperarContra/>}/>
           </>}
           
 
