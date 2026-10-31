@@ -17,6 +17,7 @@ import axios from 'axios'
 import EliminarCuenta from './components/eliminarCuenta'
 import CambiarContra from "./components/cambiarContraseña"
 import RecuperarContra from "./components/recuperarContra"
+import LogInMedico from "./components/LogInMedico"
 
 function App() {
 
@@ -98,7 +99,8 @@ function App() {
         
           <Route path="" element={<Home/>}/>
           {!tValido ? <>
-            <Route path="/login" element={<LogIn />} /> 
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/loginMedico" element={<LogInMedico />} /> 
             <Route path="/registro" element={<Register/>}/>
           </> :
           <>
