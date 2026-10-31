@@ -8,7 +8,7 @@ function RecuperarContra(){
     const enviar = async () =>{
         try{
 
-            const respose = await axios.post("http://localhost:3000/user/enviarMail", {mail : "maximilianofernadezantunes@gmail.com"})
+            const respose = await axios.post("http://localhost:3000/user/enviarMail", {mail : "Proba con fennecthefoxx3@gmail.com"})
             console.log(respose.data)
         }catch(error){
             console.log(error)

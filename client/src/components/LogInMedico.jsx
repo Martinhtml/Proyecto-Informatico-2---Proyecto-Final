@@ -56,3 +56,6 @@ function LogInMedico(){
         </div>
     </>)
 }
+
+
+export default LogInMedico;

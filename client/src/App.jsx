@@ -100,7 +100,7 @@ function App() {
           <Route path="" element={<Home/>}/>
           {!tValido ? <>
             <Route path="/login" element={<LogIn />} />
-            <Route path="/loginMedico" element={<LogInMedico />} /> 
+            <Route path="/loginMedico" element={<LogInMedico/>} /> 
             <Route path="/registro" element={<Register/>}/>
           </> :
           <>
