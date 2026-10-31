@@ -55,6 +55,7 @@ function LogIn(){
                 </form>
                 <br />
                 <p>¿No tenes cuenta? <Link to="/registro">Registrarse</Link></p>
+                <p>¿Es médico? <Link to="/LoginMedico">Iniciá sesión aquí</Link></p>
             </div>
             
         </div>
