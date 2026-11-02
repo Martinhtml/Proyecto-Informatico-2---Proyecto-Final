@@ -69,6 +69,20 @@ const subirDisponibilidad = async(req, res)=>{
     }
 }
 
+const getDisposMedico = async(req, res)=>{
+    try{
+        const dispos = await Disponibilidad.findAll({
+            where: { medicoID: req.user.id },
+            attributes: { exclude: ["DigitoVHDisponibilidad"] }
+        });
+
+        return res.status(200).json(dispos);
+
+    }catch(error){
+        return res.status(500).json(error);
+    }
+}
+
 
 const getDispos = async(req, res)=>{
     try{
@@ -101,6 +115,7 @@ module.exports = {
     subirDisponibilidad,
     getDispos,
     chequearDispo,
-    getDispoId
+    getDispoId,
+    getDisposMedico
 
 }

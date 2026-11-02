@@ -2,7 +2,7 @@ const {Router} = require("express")
 
 const {auth} = require("../middlewares/auth");
 const { tienePermiso } = require("../middlewares/permisos");
-const {verTurnosId, obtenerTurno, completarTurno, cancelarTurno, getTurnosMedico} = require("../controllers/turnoController")
+const {verTurnosId, obtenerTurno, completarTurno, cancelarTurno, getTurnosMedico, reprogramarTurno} = require("../controllers/turnoController")
 
 const router = Router();
 
@@ -14,6 +14,7 @@ router.post("/obtenerTurno/:disponibilidadId", auth, obtenerTurno)
 
 router.patch("/completarTurno/:id", auth, completarTurno)
 router.patch("/cancelarTurno/:id", auth, cancelarTurno)
+router.patch("/reprogramarTurno/:id", auth, tienePermiso("Turnos", "update"), reprogramarTurno)
 
 
 module.exports = router;
