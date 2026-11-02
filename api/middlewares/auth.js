@@ -27,7 +27,7 @@ const verificarToken = async(req, res)=>{
 const usuarioTienePermisoFront = async (req, res) => {
     const usuarioID = req.user.id
     const {tabla, accion} = req.params
-    const accesos = await obtenerAccesos(usuarioID)
+    const accesos = await obtenerAccesos(usuarioID, req.user.modo)
     if (!accesos) return res.status(401).json(false);
     const puede = await accesos.permisos.has(`${tabla}:${accion}`)
     if(!puede) return res.status(401).json(false);
