@@ -37,7 +37,7 @@ Disponibilidad.belongsTo(User, { foreignKey: "medicoID" });
 
 //Disponibilidad y Turno
 Turno.belongsTo(Disponibilidad, { foreignKey: "disponibilidadID" });
-Disponibilidad.hasOne(Turno, { foreignKey: "disponibilidadID" });
+Disponibilidad.hasMany(Turno, { foreignKey: "disponibilidadID" });
 
 //Disponibilidad y Establecimiento
 Disponibilidad.belongsTo(Establecimiento, { foreignKey: "establecimientoID" });

@@ -72,7 +72,9 @@ function  VerTurno(){
         try {
             const token = localStorage.getItem("token")
             const response = await axios.post(`http://localhost:3000/turnos/obtenerTurno/${dispoID}`, {},{headers: {authorization : `Bearer ${token}`}});
-            cargarDisposInd(dispos)
+            const lista = await cargarDispo()
+            await cargarDisposInd(lista)
+
         } catch (error) {
             console.log(error)
         }
@@ -97,8 +99,8 @@ function  VerTurno(){
             <div className="derechasT">
                 <div className="deslizadorTurnos">
                     {
-                        disposDatos.map((dispo, i)=>{
-                            return <div className="DispoTarjeta" key={i}>
+                        disposDatos.map((dispo)=>{
+                            return <div className="DispoTarjeta" key={dispo[4]}>
                                 
                                 <div className="parteIzquierda">
                                     <h1>{`Medico: ${dispo[0]}`}</h1>

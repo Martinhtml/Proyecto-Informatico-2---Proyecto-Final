@@ -12,11 +12,16 @@ const chequearDispo = async(req, res)=>{
         const disponibilidad = await Disponibilidad.findByPk(dispoId, {
             include:{
                 model : Turno,
-                attributes: ["id"]
+                attributes: ["id", "estado"]
             }
         })
         if (!disponibilidad) return res.status(200).json(false)
-        if (disponibilidad.Turno) return res.status(200).json(false);
+            
+        const ocupada = disponibilidad.Turnos.some(
+            (turno) => { return turno.estado !== "Cancelado"}
+        );
+
+        if (ocupada) return res.status(200).json(false);
         else return res.status(200).json(true);
 
 
@@ -79,11 +84,23 @@ const getDispos = async(req, res)=>{
     }
 }
 
+const getDispoId = async(req, res)=>{
+    try {
+        const dispoID = req.params.id
+        if (!dispoID) return res.status(400).json({"message": "Faltan datos"});
+        const dispo = await Disponibilidad.findByPk(dispoID);
+        if (!dispo) return res.status(404).json({"message" : "Dispo no encontrada"});
+        res.status(200).json(dispo);
+    } catch (error) {
+        return res.status(500).json(error)
+    }
+}
 
 
 module.exports = {
     subirDisponibilidad,
     getDispos,
-    chequearDispo
+    chequearDispo,
+    getDispoId
 
 }
