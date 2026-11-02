@@ -17,7 +17,9 @@ function Header() {
 
     const cargarPermisos = async(tokenActual)=>{
         const permisos = {
-            subirDispo : await puedeUsar("Disponibilidad", "create", tokenActual)
+            subirDispo : await puedeUsar("Disponibilidad", "create", tokenActual),
+            panel : await puedeUsar("Roles", "read", tokenActual)
+
         }
         setPermisos(permisos)
     }
@@ -100,6 +102,9 @@ function Header() {
                             permisos.subirDispo && <Link to="/subirDispo">Crear Turno</Link>
                         }
                         <Link to="/verTurno">Ver Turno</Link>
+                        {
+                            permisos.panel && <Link to="/panel">Panel</Link>
+                        }
                     </div>
                 )}
 

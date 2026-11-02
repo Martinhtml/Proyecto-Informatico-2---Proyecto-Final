@@ -24,6 +24,7 @@ const asignarRolNombre = async (usuarioID, nombreRol) => {
 }
 
 
+
 const obtenerMisRoles = async (req, res) => {
     try {
         const usuario = await User.findByPk(req.user.id)
