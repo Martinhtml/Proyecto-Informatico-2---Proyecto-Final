@@ -77,7 +77,7 @@ function RecuperarContra(){
                     </div>
                     
                     {(email.length>=11) ? <button type="submit">Confirmar</button> : <p>Introduzca un email valido</p>}
-                    <Link to="/perfil">Cancelar</Link>
+                    <Link to="/">Cancelar</Link>
 
                 </div>
 
@@ -99,7 +99,7 @@ function RecuperarContra(){
                     </div>
                     <p onClick={enviar} id="reenviar">Reenviar codigo</p>
                     {(tokenUser.length == 6) ? <button type="submit">Confirmar</button> : <p>Introduzca su codigo</p>}
-                    <Link to="/perfil">Cancelar</Link>
+                    <Link to="/">Cancelar</Link>
                 </div>
                 <p>{mensaje}</p>
 
@@ -122,7 +122,7 @@ function RecuperarContra(){
                         <input placeholder="Repita su contraseña" type="password" id="contraConf" onChange={(e) => setContraConf(e.target.value)}/>
                     </div>
                     {(contraseña >= 4 && contraConf == contraseña) ? <button type="submit">Confirmar</button> : <p>Datos incorrectos</p>}
-                    <Link to="/perfil">Cancelar</Link>
+                    <Link to="/">Cancelar</Link>
                 </div>
                 <p>{mensaje}</p>
 
