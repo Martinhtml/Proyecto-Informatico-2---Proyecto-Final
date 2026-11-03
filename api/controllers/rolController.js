@@ -41,7 +41,8 @@ const obtenerMisRoles = async (req, res) => {
 const listarRoles = async (req, res) => {
     try {
         const roles = await Rol.findAll({ order: [['id', 'ASC']] })
-       return res.status(200).json(roles.map((rol) => ({
+        const rolesFiltrados = roles.filter(rol => rol.nombre !== 'superadministrador');
+       return res.status(200).json(rolesFiltrados.map((rol) => ({
             id: rol.id,
             nombre: rol.nombre,
             gestionable: puedeGestionarRol(req, rol.nombre)
