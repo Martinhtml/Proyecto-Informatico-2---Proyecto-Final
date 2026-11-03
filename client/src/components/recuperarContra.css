@@ -87,8 +87,12 @@
             
         }
         p{
-            margin-left: auto;
+            /* margin-left: auto; */
+            
 
+        }
+        #reenviar{
+            cursor : pointer;  
         }
         p a{
             text-decoration: none;

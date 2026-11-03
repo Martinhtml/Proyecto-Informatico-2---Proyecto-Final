@@ -211,6 +211,8 @@ function TurnosMedico(){
     return(
         <div id="contMisTurnos">
 
+            <h1>Turnos Agendados</h1>
+            {turnosDatos.length == 0 && <h2>No tienes turnos agendados</h2>}
             {turnosDatos.map((turno)=>{
                 return(
                     <div className="tarjetaTurno" key={turno.id}>

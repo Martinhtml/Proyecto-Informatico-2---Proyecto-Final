@@ -223,6 +223,10 @@ function MisTurnos(){
 
     return(<div id="contMisTurnos">
         
+        <h1>Mis Turnos</h1>
+        {turnosDatos.length == 0 && <h2>No tienes turnos</h2>}
+
+
         {turnosDatos.map((turno)=>{
             return <div className="tarjetaTurno" key={turno.id}>
                 <h1>{`Medico: ${turno.medico}`}</h1>

@@ -1,7 +1,7 @@
 const {Router} = require("express")
 
 const {auth} = require("../middlewares/auth");
-const {iniciarSesion,iniciarSesionMedico, register, obtenerNombreUsuario, obtenerUsuario, editarUser, obtenerDatosUsuario, borrarCuenta, cambiarPassword, enviarMail} = require("../controllers/userController");
+const { recuperarPass, iniciarSesion,iniciarSesionMedico, register, obtenerNombreUsuario, obtenerUsuario, editarUser, obtenerDatosUsuario, borrarCuenta, cambiarPassword, enviarMail} = require("../controllers/userController");
 
 
 const router = Router();
@@ -21,6 +21,8 @@ router.get("/getDatosUser/:id", auth, obtenerDatosUsuario);
 
 router.patch("/editProf", auth, editarUser);
 router.patch("/cambiarPass", auth, cambiarPassword);
+router.patch("/recuperarContra", recuperarPass);
+
 
 router.delete("/eliminarCuenta", auth, borrarCuenta);
 

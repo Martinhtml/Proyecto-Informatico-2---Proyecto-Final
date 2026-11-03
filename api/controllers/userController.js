@@ -266,11 +266,45 @@ const cambiarPassword = async(req, res)=>{
 }
 
 
+const recuperarPass = async(req, res)=>{
+    try{
+        const {email, contra} = req.body;
+        if(!email || !contra) return res.status(400).json({"message": "Faltan datos"});
+        const user = await User.findOne({where: {email: email}})
+
+        if(!user) return res.status(400).json({"message" : "Credenciales incorrectas"})
+
+        const contraHash = await bcrypt.hash(contra, 12)
+        user.contraseña = contraHash
+
+        const dvh = calcularDVH(user.nombre, user.apellido, user.dni, user.email, contraHash)
+        user.DigitoVHUser = dvh
+        await user.save()
+
+        let dvhsTot = await User.findAll({attributes : ['DigitoVHUser']});
+        dvhsTot = dvhsTot.map((a)=>a.DigitoVHUser)
+
+        await calcularDVV("users", dvhsTot)
+
+        await registrarEventoBitacora({
+            idUser: user.id,
+            accion: 'RECUPERACION DE CONTRASEÑA',
+            descripcion: `El usuario ${user.id} recupero su contraseña`
+        })
+
+        return res.status(200).json({"message" :"Contraseña recuperada"})
+
+    }catch(error){
+        return res.status(500).json(error)
+    }
+}
+
+
 const enviarMail = async (req, res)=>{
     try{
 
         const {mail} = req.body;
-        const tokenRecuperacion = crypto.randomInt(10000, 100000).toString();
+        const tokenRecuperacion = crypto.randomInt(100000, 1000000).toString();
         const transportador = nodemailer.createTransport({
             service : "gmail",
             auth : {
@@ -286,7 +320,7 @@ const enviarMail = async (req, res)=>{
         }
 
         await transportador.sendMail(confMail);
-        return res.status(200).json({"message" : "Mail enviado con exito"})
+        return res.status(200).json(tokenRecuperacion)
     }catch(error){
         return res.status(500).json(error);
     }
@@ -304,6 +338,7 @@ module.exports = {
     obtenerDatosUsuario,
     borrarCuenta,
     cambiarPassword,
-    enviarMail
+    enviarMail,
+    recuperarPass
 
  };

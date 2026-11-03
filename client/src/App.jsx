@@ -104,7 +104,7 @@ function App() {
         <Route element={<Layout />} path="">
         
           <Route path="" element={<Home/>}/>
-            <Route path="/recuperarContra" element={<RecuperarContra/>}/>
+          <Route path="/recuperarContra" element={<RecuperarContra/>}/>
 
           {!tValido ? <>
             <Route path="/login" element={<LogIn />} />

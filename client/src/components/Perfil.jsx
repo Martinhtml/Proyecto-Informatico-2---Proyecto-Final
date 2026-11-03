@@ -33,6 +33,9 @@ function Perfil(){
         navigate("/cambiarContra")
     }
 
+    const llevarRecuperarContra = ()=>{
+        navigate("/recuperarContra")
+    }
 
     const obtenerNombreUsuario = async () => {
         const token = localStorage.getItem("token")
@@ -74,6 +77,7 @@ function Perfil(){
             </div>
             <button className="editarPerfil" onClick={llevarEditarPerfil}>Editar perfil ✎</button>
             <button className="editarPerfil" onClick={llevarCambiarPass}>Editar Contraseña</button>
+            <button className="editarPerfil" onClick={llevarRecuperarContra}>Recuperar Contraseña</button>
 
             <button className="cerrarSesion" onClick={llevarLogout}>Cerrar Sesion</button>
             <button className="cerrarSesion" onClick={llevarEliminarCuenta}>Eliminar mi cuenta</button>
