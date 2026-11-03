@@ -15,54 +15,54 @@ function TurnosMedico(){
 
 
     const cargarDisponibilidades = async() => {
-    try{
-        const token = localStorage.getItem("token");
+        try{
+            const token = localStorage.getItem("token");
 
-        const response = await axios.get(
-            "http://localhost:3000/disponibilidad/getDisposMedico",
-            { headers: { authorization: `Bearer ${token}` } }
-        );
-
-        const lista = [];
-
-        for (let i = 0; i < response.data.length; i++) {
-            const dispo = response.data[i];
-
-            const response2 = await axios.get(
-                `http://localhost:3000/disponibilidad/chequearDispo/${dispo.id}`,
+            const response = await axios.get(
+                "http://localhost:3000/disponibilidad/getDisposMedico",
                 { headers: { authorization: `Bearer ${token}` } }
             );
 
-            if (response2.data === true) {
-                const response3 = await axios.get(
-                    `http://localhost:3000/user/getDatosUser/${dispo.medicoID}`,
+            const lista = [];
+
+            for (let i = 0; i < response.data.length; i++) {
+                const dispo = response.data[i];
+
+                const response2 = await axios.get(
+                    `http://localhost:3000/disponibilidad/chequearDispo/${dispo.id}`,
                     { headers: { authorization: `Bearer ${token}` } }
                 );
 
-                const nombreMedico = `${response3.data.nombre} ${response3.data.apellido}`;
+                if (response2.data === true) {
+                    const response3 = await axios.get(
+                        `http://localhost:3000/user/getDatosUser/${dispo.medicoID}`,
+                        { headers: { authorization: `Bearer ${token}` } }
+                    );
 
-                const response4 = await axios.get(
-                    `http://localhost:3000/establecimientos/getEstByID/${dispo.establecimientoID}`
-                );
+                    const nombreMedico = `${response3.data.nombre} ${response3.data.apellido}`;
 
-                const establecimiento = `${response4.data.nombre} - ${response4.data.direccion}`;
+                    const response4 = await axios.get(
+                        `http://localhost:3000/establecimientos/getEstByID/${dispo.establecimientoID}`
+                    );
 
-                lista.push({
-                    id: dispo.id,
-                    fechaInicio: dispo.fechaInicio,
-                    fechaFin: dispo.fechaFin,
-                    medico: nombreMedico,
-                    establecimiento: establecimiento
-                });
+                    const establecimiento = `${response4.data.nombre} - ${response4.data.direccion}`;
+
+                    lista.push({
+                        id: dispo.id,
+                        fechaInicio: dispo.fechaInicio,
+                        fechaFin: dispo.fechaFin,
+                        medico: nombreMedico,
+                        establecimiento: establecimiento
+                    });
+                }
             }
+
+            setDisponibilidades(lista);
+
+        }catch(error){
+            console.log(error);
         }
-
-        setDisponibilidades(lista);
-
-    }catch(error){
-        console.log(error);
     }
-}
 
 
     const iniciarReprogramacion = async(id) => {

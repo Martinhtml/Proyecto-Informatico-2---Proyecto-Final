@@ -33,7 +33,7 @@ function App() {
   const cargarPermisos = async(tokenActual)=>{
     const permisos = {
       subirDispo : await puedeUsar("Disponibilidad", "create", tokenActual),
-      verTurnoDoc : await puedeUsar("Turnos", "read", tokenActual)
+      verTurnoDoc : await puedeUsar("Turnos", "update", tokenActual)
     }
     console.log("Permisos cargados:", permisos);
 

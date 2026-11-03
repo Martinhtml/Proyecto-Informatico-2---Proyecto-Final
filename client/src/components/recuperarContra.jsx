@@ -7,6 +7,11 @@ import axios from "axios";
 function RecuperarContra(){
     
     const [email, setEmail] = useState("")
+    const [tokenR, setTokenR] = useState("")
+
+
+    const [etapa, setEtapa] = useState(0)
+
 
     const enviar = async (e) =>{
         e.preventDefault();

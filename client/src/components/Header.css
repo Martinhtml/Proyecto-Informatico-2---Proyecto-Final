@@ -12,10 +12,11 @@ header:hover{
     background-color: #0d5c75;
 }
 header #ContenedorTitulo{
+    box-sizing: border-box;
     justify-content: center;
 }
 header #ContenedorTitulo a{
-   
+    white-space: nowrap;
     font-size: 30px;
     color : white;
     text-decoration: none;
@@ -27,7 +28,7 @@ header #ContenedorTitulo a:hover{
     font-size: 34px;
 }
 .ContenedorMedio {
-    width: 33%;
+    width: 66%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -86,6 +87,7 @@ header #ContenedorSaludo{
 }
 
 header #ContenedorSaludo a {
+    white-space: nowrap;
     text-decoration: none;
     color: #f7f7f7;
     font-size: 30px;
@@ -101,6 +103,8 @@ header nav {
 }
 
 header nav a {
+    white-space: nowrap;
+
     text-decoration: none;
     color: #a3cef1;
     font-size: 30px;
