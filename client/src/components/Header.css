@@ -45,12 +45,12 @@ header #ContenedorTitulo a:hover{
     a {
         text-decoration: none;
         color: #a3cef1;
-        font-size: 30px;
+        font-size: 20px;
         padding: 10px;
         transition: all 0.5s ease;
     }
     a:hover{
-        font-size: 34px;
+        font-size: 25px;
     }
 }
 #ContenedorTurnos h2 {
