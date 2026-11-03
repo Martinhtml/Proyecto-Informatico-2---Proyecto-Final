@@ -46,7 +46,6 @@ const listarRoles = async (req, res) => {
         return res.status(500).json({ error: error.message })
     }
 }
-
 const asignarRolAUsuario = async (req, res) => {
     try {
         const { usuarioID, rolID } = req.body
