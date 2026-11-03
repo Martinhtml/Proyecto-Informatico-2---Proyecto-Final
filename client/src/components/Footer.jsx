@@ -16,11 +16,11 @@ function Footer() {
                     <Link to="/" id="TituloFooter">Gestor de Turnos</Link>
                 </div>
                 <div className="Sectores">
-                    <h3>Secciones: </h3>
+                    <h3>Contacto: </h3>
                     <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link>Ver Turnos</Link></li>
-                        <li><Link>Perfil</Link></li>
+                        <li><Link to="https://mail.google.com/mail/?view=cm&to=donnari.martinet36@gmail.com" rel="noopener noreferrer"  target="_blank">Administracion 1</Link></li>
+                        <li><Link to="https://mail.google.com/mail/?view=cm&to=ocampo.joaquinet36@gmail.com" rel="noopener noreferrer"  target="_blank">Administracion 2</Link></li>
+
                     </ul>
                 </div>
                 <div className="Sectores">
@@ -31,7 +31,7 @@ function Footer() {
                     </ul>
                 </div>
                 <div className="Sectores">
-                    <h3>Contacto: </h3>
+                    <h3>Redes: </h3>
                     <div className="Iconos">
                         <br />
                         <a href="https://www.instagram.com/_martin_2237?dlrfY3pxZGRldjV2b200">
