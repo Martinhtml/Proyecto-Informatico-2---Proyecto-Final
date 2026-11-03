@@ -3,12 +3,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    height: 550px;
     width: 95vw;
 }
 
 .rectangulo{
-    width: 30%;
+    width: 400px;
     height: 100%;
     display: flex;
     justify-content: flex-start;
