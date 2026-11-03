@@ -3,9 +3,9 @@ const { registrarEventoBitacora } = require('./bitacoraController')
 
 
 const ROL_SUPER = "superadministrador"
-
+const ROLES_RESERVADOS = ["administrador",  ROL_SUPER]
 const esSuperadmin = (req) => req.user.roles.includes(ROL_SUPER)
-
+const puedeGestionarRol = (req, nombreRol) => !ROLES_RESERVADOS.includes(nombreRol) || esSuperadmin(req)    
 
 const asignarRolNombre = async (usuarioID, nombreRol) => {
     
@@ -41,7 +41,30 @@ const obtenerMisRoles = async (req, res) => {
 const listarRoles = async (req, res) => {
     try {
         const roles = await Rol.findAll({ order: [['id', 'ASC']] })
-        return res.status(200).json(roles)
+       return res.status(200).json(roles.map((rol) => ({
+            id: rol.id,
+            nombre: rol.nombre,
+            gestionable: puedeGestionarRol(req, rol.nombre)
+        })))
+    } catch (error) {
+        return res.status(500).json({ error: error.message })
+    }
+}
+const listarUsuariosConRoles = async (req, res) => {
+    try {
+        const usuarios = await User.findAll({
+            attributes: ['id', 'nombre', 'apellido', 'email'],
+            include: [{ model: Rol, through: { attributes: [] } }],
+            order: [['id', 'ASC']]
+        })
+        return res.status(200).json(usuarios.map((u) => ({
+            id: u.id,
+            nombre: u.nombre,
+            apellido: u.apellido,
+            email: u.email,
+            esMio: u.id === req.user.id,
+            roles: u.Roles.map((rol) => ({ id: rol.id, nombre: rol.nombre }))
+        })))
     } catch (error) {
         return res.status(500).json({ error: error.message })
     }
@@ -61,15 +84,15 @@ const asignarRolAUsuario = async (req, res) => {
             return res.status(404).json({ message: "Usuario o rol no encontrado" })
         }
 
-        if (rol.nombre === ROL_SUPER && !esSuperadmin(req)) {
-            return res.status(403).json({ message: "Solo un superadministrador puede asignar ese rol" })
+        if (!puedeGestionarRol(req, rol.nombre)) {
+            return res.status(403).json({ message: `Solo un superadministrador puede asignar el rol ${rol.nombre}` })
         }
  
-        if (await usuario.hasRol(rol)) {
+        if (await usuario.hasRoles(rol)) {
             return res.status(409).json({ message: "El usuario ya tiene ese rol" })
         }
  
-        await usuario.addRol(rol)
+        await usuario.addRoles(rol)
  
         await registrarEventoBitacora({
             idUser: req.user.id,
@@ -101,7 +124,7 @@ const quitarRolDeUsuario = async (req, res) => {
             return res.status(403).json({ message: "Solo un superadministrador puede quitar ese rol" })
         }
  
-        if (!(await usuario.hasRol(rol))) {
+        if (!(await usuario.hasRoles(rol))) {
             return res.status(404).json({ message: "El usuario no tiene ese rol" })
         }
  
@@ -110,7 +133,7 @@ const quitarRolDeUsuario = async (req, res) => {
             return res.status(400).json({ message: "No se puede quitar el rol al único superadministrador" })
         }
  
-        await usuario.removeRole(rol)
+        await usuario.removeRoles(rol)
  
         await registrarEventoBitacora({
             idUser: req.user.id,
@@ -130,5 +153,6 @@ module.exports = {
     obtenerMisRoles,
     listarRoles,
     asignarRolAUsuario,
-    quitarRolDeUsuario
+    quitarRolDeUsuario,
+    listarUsuariosConRoles
 }
