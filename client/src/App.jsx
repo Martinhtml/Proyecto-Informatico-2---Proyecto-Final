@@ -20,6 +20,7 @@ import RecuperarContra from "./components/recuperarContra"
 import LogInMedico from "./components/LogInMedico"
 import MisTurnos from './components/MisTurnos'
 import TurnosMedico from "./components/MisTurnosMedico"
+import Panel from "./components/Panel"
 
 
 function App() {
@@ -33,7 +34,8 @@ function App() {
   const cargarPermisos = async(tokenActual)=>{
     const permisos = {
       subirDispo : await puedeUsar("Disponibilidad", "create", tokenActual),
-      verTurnoDoc : await puedeUsar("Turnos", "read", tokenActual)
+      verTurnoDoc : await puedeUsar("Turnos", "read", tokenActual),
+      panel : await puedeUsar("Roles", "read", tokenActual),
     }
     console.log("Permisos cargados:", permisos);
 
@@ -115,6 +117,8 @@ function App() {
             <Route path="/editP" element={<EditarP/>}/>
             {permisos.subirDispo && <Route path='/subirDispo' element={<SubirDispo/>}/> }
             {permisos.verTurnoDoc && <Route path='/MisTurnosMed' element={<TurnosMedico/>}/> }
+            {permisos.verTurnoDoc && <Route path='/MisTurnosMed' element={<TurnosMedico/>}/> }
+            {permisos.panel && <Route path='/panel' element={<Panel/>}/> }
 
             <Route path="/verTurno" element={<VerTurno/>}/>
             <Route path="/eliminarCuenta" element={<EliminarCuenta/>}/>
